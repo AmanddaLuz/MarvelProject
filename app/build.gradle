@@ -31,6 +31,14 @@ android {
     }
 }
 
+ext{
+    retrofitVersion = "2.9.0"
+    okHttpVersion = "4.9.0"
+    coroutinesVersion = "1.5.1"
+    lifecycleVersion = "2.4.1"
+    timberVersion = "4.7.1"
+}
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -40,4 +48,19 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    // Architectural Components
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timberVersion"
 }
