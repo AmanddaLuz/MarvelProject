@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MarvelProject</string>
+    <string name="favorites">Favorites</string>
+    <string name="home">Home</string>
 </resources>
