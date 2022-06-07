@@ -1,8 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MarvelProject</string>
-    <string name="favorites">Favorites</string>
-    <string name="home">Home</string>
     <string name="description">asdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKK</string>
-    <string name="title">Title</string>
-    <string name="character_name_item">Name</string>
 </resources>
