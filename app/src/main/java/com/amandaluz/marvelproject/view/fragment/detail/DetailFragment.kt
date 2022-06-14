@@ -1,4 +1,4 @@
-package com.amandaluz.marvelproject.detail
+package com.amandaluz.marvelproject.view.fragment.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

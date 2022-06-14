@@ -1,4 +1,7 @@
 package com.amandaluz.marvelproject.core
 
-class Status {
+enum class Status {
+    SUCCESS,
+    ERROR,
+    LOADING
 }

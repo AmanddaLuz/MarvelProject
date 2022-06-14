@@ -1,4 +1,4 @@
-package com.amandaluz.marvelproject.favorite
+package com.amandaluz.marvelproject.view.fragment.favorite
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

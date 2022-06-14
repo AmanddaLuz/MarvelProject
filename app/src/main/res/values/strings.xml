@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">MarvelProject</string>
-    <string name="favorites">Favorites</string>
+    <string name="favoritos">Favorites</string>
     <string name="home">Home</string>
     <string name="description">asdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKK</string>
     <string name="title">Title</string>
     <string name="character_name_item">Name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Home-->
     <string name="txt_home_toolbar">Marvel</string>
+    <!--Favoritos-->
     <string name="txt_favorites_toolbar">Favoritos</string>
     <string name="ic_search_toolbar">Search</string>
 </resources>
