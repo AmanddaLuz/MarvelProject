@@ -1,20 +1,45 @@
 package com.amandaluz.marvelproject.view.fragment.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.amandaluz.marvelproject.R
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.fragment.app.Fragment
+import com.amandaluz.marvelproject.data.model.Results
+import com.amandaluz.marvelproject.databinding.CharacterDetailsBinding
+import com.bumptech.glide.Glide
 
 class DetailFragment : Fragment() {
+    lateinit var binding: CharacterDetailsBinding
+    private lateinit var character: Results
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.character_details, container, false)
+    ): View {
+        binding = CharacterDetailsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        character = arguments?.getSerializable("CHARACTER") as Results
+
+        binding.run {
+            txtTitleDetails.text = character.name
+            txtDescriptionDetails.text = character.description
+
+            setImage(imgDetail)
+            setImage(imgPoster)
+        }
+    }
+
+    private fun setImage(image: AppCompatImageView) {
+        Glide.with(this@DetailFragment)
+            .load("${character.thumbnail.path}.${character.thumbnail.extension}")
+            .centerCrop()
+            .into(image)
     }
 
 }

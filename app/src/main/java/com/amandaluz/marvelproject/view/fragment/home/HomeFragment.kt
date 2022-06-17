@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
+import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.core.Status
 import com.amandaluz.marvelproject.data.model.Results
 import com.amandaluz.marvelproject.data.network.ApiService
@@ -30,7 +33,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,18 +49,6 @@ class HomeFragment : Fragment() {
         observeVMEvents()
     }
 
-    private fun setAdapter(characterList: MutableList<Results>){
-        characterAdapter = CharacterAdapter(characterList)
-    }
-
-    private fun setRecyclerView(characterList: MutableList<Results>) {
-        setAdapter(characterList = characterList)
-        binding.rvHomeFragment.apply {
-            setHasFixedSize(true)
-            adapter = characterAdapter
-        }
-    }
-
     private fun getCharacters() {
         val ts = ts()
         viewModel.getCharacters(apikey(), hash(ts), ts.toLong())
@@ -70,7 +61,7 @@ class HomeFragment : Fragment() {
                 Status.SUCCESS -> {
                     it.data?.let { response ->
                         Timber.tag("Sucesso").i(response.toString())
-                        setRecyclerView(response.data.results as MutableList<Results>)
+                        setRecyclerView(response.data.results)
                     }
                 }
                 Status.ERROR -> {
@@ -80,6 +71,24 @@ class HomeFragment : Fragment() {
                     Timber.tag("Loading").i(it.loading.toString())
                 }
             }
+        }
+    }
+
+    private fun setAdapter(characterList: List<Results>) {
+        characterAdapter = CharacterAdapter(characterList) { character ->
+            Timber.tag("Click").i(character.name)
+            findNavController().navigate(R.id.action_homeFragment_to_detailFragment,
+                Bundle().apply {
+                    putSerializable("CHARACTER", character)
+                })
+        }
+    }
+
+    private fun setRecyclerView(characterList: List<Results>) {
+        setAdapter(characterList = characterList)
+        binding.rvHomeFragment.apply {
+            setHasFixedSize(true)
+            adapter = characterAdapter
         }
     }
 }
