@@ -27,6 +27,7 @@ class HomeViewModel(
                 }
                 _response.value = State.loading(false)
                 _response.value = State.success(response)
+
             } catch (throwable: Throwable){
                 _response.value = State.error(throwable)
                 _response.value = State.loading(false)
@@ -45,5 +46,4 @@ class HomeViewModel(
             throw IllegalArgumentException("Unknown viewModel Class")
         }
     }
-
 }

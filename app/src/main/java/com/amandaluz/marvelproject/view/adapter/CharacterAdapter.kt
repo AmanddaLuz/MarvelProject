@@ -7,8 +7,20 @@ import com.amandaluz.marvelproject.data.model.Results
 import com.amandaluz.marvelproject.databinding.CharacterItemBinding
 import com.bumptech.glide.Glide
 
-class CharacterAdapter(val characterList: MutableList<Results>) :
+class CharacterAdapter(private val characterList: MutableList<Results>) :
     RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
+        val view = LayoutInflater.from(parent.context)
+        val binding = CharacterItemBinding.inflate(view, parent, false)
+        return CharacterViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
+        holder.bindView(characterList[position])
+    }
+
+    override fun getItemCount(): Int = characterList.size
 
     class CharacterViewHolder(private val binding: CharacterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -24,17 +36,4 @@ class CharacterAdapter(val characterList: MutableList<Results>) :
             }
         }
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        val view = LayoutInflater.from(parent.context)
-        val binding = CharacterItemBinding.inflate(view, parent, false)
-        return CharacterViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        val characters = characterList[position]
-        holder.bindView(characters)
-    }
-
-    override fun getItemCount(): Int = characterList.count()
 }
