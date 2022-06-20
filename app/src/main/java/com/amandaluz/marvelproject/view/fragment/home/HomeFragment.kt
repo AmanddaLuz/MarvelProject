@@ -44,7 +44,6 @@ class HomeFragment : Fragment() {
         repository = CharactersRepositoryImpl(ApiService.service)
         viewModel = HomeViewModel.HomeViewModelProviderFactory(repository, Dispatchers.IO)
             .create(HomeViewModel::class.java)
-
         getCharacters()
         observeVMEvents()
     }

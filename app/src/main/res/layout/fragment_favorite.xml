@@ -34,12 +34,14 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
-        app:layout_constraintTop_toBottomOf="@id/fav_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/character_item"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fav_toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        app:spanCount="3"
+        tools:listitem="@layout/character_item" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

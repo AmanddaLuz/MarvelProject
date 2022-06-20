@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
+import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.data.model.Results
 import com.amandaluz.marvelproject.databinding.CharacterDetailsBinding
 import com.bumptech.glide.Glide
@@ -29,6 +30,9 @@ class DetailFragment : Fragment() {
         binding.run {
             txtTitleDetails.text = character.name
             txtDescriptionDetails.text = character.description
+            fabDetails.setOnClickListener{
+                binding.fabDetails.setImageResource(R.drawable.ic_full_favorite)
+            }
 
             setImage(imgDetail)
             setImage(imgPoster)
@@ -41,5 +45,7 @@ class DetailFragment : Fragment() {
             .centerCrop()
             .into(image)
     }
+
+
 
 }

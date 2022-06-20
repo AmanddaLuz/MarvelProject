@@ -23,14 +23,13 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigator"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/black"
-        app:menu="@menu/botton_navigator"
-        app:labelVisibilityMode="selected"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        app:labelVisibilityMode="auto"
+        app:itemIconTint="@color/color_item_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:menu="@menu/botton_navigator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
