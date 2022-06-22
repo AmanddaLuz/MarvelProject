@@ -1,11 +1,10 @@
 package com.amandaluz.marvelproject.view.fragment.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.amandaluz.marvelproject.R
@@ -55,8 +54,11 @@ class HomeFragment : BaseFragment() {
         if (hasInternet(context)) {
             getCharacters()
         }else{
-            //AlertDialog
-            Toast.makeText(context, "Sem internet!", Toast.LENGTH_LONG).show()
+            AlertDialog.Builder(context)
+                .setTitle("Erro de conexão!")
+                .setMessage("Verifique sua internet e tente novamente.")
+                .setPositiveButton("Confirmar"){_, _ ->}
+                .show()
         }
     }
 
@@ -70,7 +72,7 @@ class HomeFragment : BaseFragment() {
             if (viewLifecycleOwner.lifecycle.currentState != Lifecycle.State.RESUMED) return@observe
             when (it.status) {
                 Status.SUCCESS -> {
-                    it.data?.let { response ->
+                    it.data?.let {response ->
                         Timber.tag("Sucesso").i(response.toString())
                         setRecyclerView(response.data.results)
                     }

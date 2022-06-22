@@ -25,6 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/character_item"
         tools:itemCount="20"
+        android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"/>
 
