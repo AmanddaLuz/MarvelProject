@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.amandaluz.marvelproject.R
+import com.amandaluz.marvelproject.core.BaseFragment
 import com.amandaluz.marvelproject.core.Status
+import com.amandaluz.marvelproject.core.hasInternet
 import com.amandaluz.marvelproject.data.model.Results
 import com.amandaluz.marvelproject.data.network.ApiService
 import com.amandaluz.marvelproject.data.repository.CharacterRepository
@@ -23,7 +25,7 @@ import com.amandaluz.marvelproject.view.fragment.home.viewmodel.HomeViewModel
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
     lateinit var viewModel: HomeViewModel
     lateinit var repository: CharacterRepository
 
@@ -40,12 +42,22 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Timber.tag("CONNECTION").i(hasInternet(context).toString())
 
         repository = CharactersRepositoryImpl(ApiService.service)
         viewModel = HomeViewModel.HomeViewModelProviderFactory(repository, Dispatchers.IO)
             .create(HomeViewModel::class.java)
-        getCharacters()
+        checkConnection()
         observeVMEvents()
+    }
+
+    override fun checkConnection() {
+        if (hasInternet(context)) {
+            getCharacters()
+        }else{
+            //AlertDialog
+            Toast.makeText(context, "Sem internet!", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun getCharacters() {

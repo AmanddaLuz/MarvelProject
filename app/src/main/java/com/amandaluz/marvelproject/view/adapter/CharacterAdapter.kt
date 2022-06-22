@@ -20,7 +20,6 @@ class CharacterAdapter(
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         holder.bindView(characterList[position])
-
     }
 
     override fun getItemCount(): Int = characterList.size
