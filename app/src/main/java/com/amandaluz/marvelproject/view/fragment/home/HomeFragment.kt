@@ -55,9 +55,9 @@ class HomeFragment : BaseFragment() {
             getCharacters()
         }else{
             AlertDialog.Builder(context)
-                .setTitle("Erro de conexão!")
-                .setMessage("Verifique sua internet e tente novamente.")
-                .setPositiveButton("Confirmar"){_, _ ->}
+                .setTitle(getString(R.string.title_connection))
+                .setMessage(getString(R.string.verify_connection))
+                .setPositiveButton(getString(R.string.confirm_connection)){ _, _ ->}
                 .show()
         }
     }
