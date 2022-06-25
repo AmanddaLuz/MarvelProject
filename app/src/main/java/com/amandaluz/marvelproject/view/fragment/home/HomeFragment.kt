@@ -55,9 +55,9 @@ class HomeFragment : BaseFragment() {
             getCharacters()
         }else{
             AlertDialog.Builder(context)
-                .setTitle(getString(R.string.title_connection))
-                .setMessage(getString(R.string.verify_connection))
-                .setPositiveButton(getString(R.string.confirm_connection)){ _, _ ->}
+                .setTitle(getString(R.string.connection_error))
+                .setMessage(getString(R.string.verify_internet))
+                .setPositiveButton(getString(R.string.confirm)){ _, _ ->}
                 .show()
         }
     }

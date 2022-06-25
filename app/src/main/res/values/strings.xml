@@ -12,7 +12,7 @@
     <!--Favoritos-->
     <string name="txt_favorites_toolbar">Favoritos</string>
     <string name="ic_search_toolbar">Search</string>
-    <string name="title_connection">Erro de conexão!</string>
-    <string name="verify_connection">Verifique sua internet e tente novamente.</string>
-    <string name="confirm_connection">Confirmar</string>
+    <string name="connection_error">Erro de conexão!</string>
+    <string name="verify_internet">Verifique sua internet e tente novamente.</string>
+    <string name="confirm">Confirmar</string>
 </resources>
