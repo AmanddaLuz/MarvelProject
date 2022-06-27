@@ -10,4 +10,6 @@ interface DatabaseRepository {
     fun getAllCharacters(): LiveData<List<Results>>
 
     suspend fun deleteCharacter(result: Results)
+
+    suspend fun getFavoriteCharacter(characterId: Long): Results?
 }

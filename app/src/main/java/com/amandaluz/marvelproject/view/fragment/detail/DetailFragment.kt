@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.core.Status
 import com.amandaluz.marvelproject.data.db.AppDatabase
@@ -16,6 +17,7 @@ import com.amandaluz.marvelproject.data.model.Results
 import com.amandaluz.marvelproject.databinding.CharacterDetailsBinding
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class DetailFragment : Fragment() {
@@ -47,18 +49,25 @@ class DetailFragment : Fragment() {
         binding.run {
             txtTitleDetails.text = character.name
             txtDescriptionDetails.text = character.description
-            fabDetails.setOnClickListener{
-                binding.fabDetails.setImageResource(R.drawable.ic_full_favorite)
-            }
 
             setImage(imgDetail)
             setImage(imgPoster)
 
             fabDetails.setOnClickListener{
                 viewModel.insertCharacters(character)
+                binding.fabDetails.setImageResource(R.drawable.ic_full_favorite)
             }
         }
+        setColorHeart()
         observeVMEvents()
+    }
+
+    private fun setColorHeart(){
+        lifecycleScope.launch {
+            dao.getFavoriteCharacter(character.id)?.let {
+                binding.fabDetails.setImageResource(R.drawable.ic_full_favorite)
+            }
+        }
     }
 
     private fun observeVMEvents() {
@@ -83,7 +92,4 @@ class DetailFragment : Fragment() {
             .centerCrop()
             .into(image)
     }
-
-
-
 }

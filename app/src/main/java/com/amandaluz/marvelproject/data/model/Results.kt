@@ -15,7 +15,7 @@ data class Results(
     @SerializedName("events")
     val events: Events,
     @SerializedName("id")
-    val id: Int,
+    val id: Long,
     @SerializedName("modified")
     val modified: String,
     @SerializedName("name")
