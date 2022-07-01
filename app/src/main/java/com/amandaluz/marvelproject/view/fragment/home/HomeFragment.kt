@@ -21,6 +21,7 @@ import com.amandaluz.marvelproject.util.hash
 import com.amandaluz.marvelproject.util.ts
 import com.amandaluz.marvelproject.view.adapter.CharacterAdapter
 import com.amandaluz.marvelproject.view.fragment.home.viewmodel.HomeViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
@@ -78,6 +79,9 @@ class HomeFragment : BaseFragment() {
                     }
                 }
                 Status.ERROR -> {
+                    val snack = Snackbar.make(binding.container, "Not found", Snackbar.LENGTH_INDEFINITE)
+                    snack.setAction("Confirmar"){}
+                    snack.show()
                     Timber.tag("Error").i(it.error)
                 }
                 Status.LOADING -> {

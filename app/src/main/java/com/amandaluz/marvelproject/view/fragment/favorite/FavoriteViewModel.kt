@@ -10,5 +10,4 @@ class FavoriteViewModel(
 ): ViewModel() {
 
     fun getCharacters() = repository.getAllCharacters()
-
 }

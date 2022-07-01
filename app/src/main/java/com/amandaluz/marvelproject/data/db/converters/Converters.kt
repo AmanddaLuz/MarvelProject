@@ -16,6 +16,19 @@ class Converters {
     fun toThumbnail(string: String): Thumbnail = Gson().fromJson(string, Thumbnail::class.java)
 
     @TypeConverter
+    fun toListUrls(string: String?): List<Url?>? {
+        if (string == null) {
+            return Collections.emptyList()
+        }
+        val listType: Type = object :
+            TypeToken<List<Url?>?>() {}.type
+        return Gson().fromJson<List<Url?>>(string, listType)
+    }
+
+    @TypeConverter
+    fun fromListUrls(urls: List<Url>): String = Gson().toJson(urls)
+
+    @TypeConverter
     fun fromComics(comics: Comics): String = Gson().toJson(comics)
 
     @TypeConverter
@@ -38,18 +51,5 @@ class Converters {
 
     @TypeConverter
     fun toEvents(string: String): Events = Gson().fromJson(string, Events::class.java)
-
-    @TypeConverter
-    fun fromListUrls(urls: List<Url>): String = Gson().toJson(urls)
-
-    @TypeConverter
-    fun toListUrls(data: String?): List<Url?>? {
-        if (data == null) {
-            return Collections.emptyList()
-        }
-        val listType: Type = object :
-            TypeToken<List<Url?>?>() {}.type
-        return Gson().fromJson<List<Url?>>(data, listType)
-    }
 
 }

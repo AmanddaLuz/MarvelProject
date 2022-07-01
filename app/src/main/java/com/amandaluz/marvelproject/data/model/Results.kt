@@ -8,14 +8,14 @@ import java.io.Serializable
 @Entity(tableName = "results_table")
 data class Results(
     @PrimaryKey
+    @SerializedName("id")
+    val id: Long,
     @SerializedName("comics")
     val comics: Comics,
     @SerializedName("description")
     val description: String,
     @SerializedName("events")
     val events: Events,
-    @SerializedName("id")
-    val id: Long,
     @SerializedName("modified")
     val modified: String,
     @SerializedName("name")
