@@ -54,11 +54,11 @@ class HomeFragment : BaseFragment() {
     override fun checkConnection() {
         if (hasInternet(context)) {
             getCharacters()
-        }else{
+        } else {
             AlertDialog.Builder(context)
                 .setTitle(getString(R.string.connection_error))
                 .setMessage(getString(R.string.verify_internet))
-                .setPositiveButton(getString(R.string.confirm)){ _, _ ->}
+                .setPositiveButton(getString(R.string.confirm)) { _, _ -> }
                 .show()
         }
     }
@@ -73,14 +73,15 @@ class HomeFragment : BaseFragment() {
             if (viewLifecycleOwner.lifecycle.currentState != Lifecycle.State.RESUMED) return@observe
             when (it.status) {
                 Status.SUCCESS -> {
-                    it.data?.let {response ->
+                    it.data?.let { response ->
                         Timber.tag("Sucesso").i(response.toString())
                         setRecyclerView(response.data.results)
                     }
                 }
                 Status.ERROR -> {
-                    val snack = Snackbar.make(binding.container, "Not found", Snackbar.LENGTH_INDEFINITE)
-                    snack.setAction("Confirmar"){}
+                    val snack =
+                        Snackbar.make(binding.container, "Not found", Snackbar.LENGTH_INDEFINITE)
+                    snack.setAction("Confirmar") {}
                     snack.show()
                     Timber.tag("Error").i(it.error)
                 }
@@ -92,13 +93,13 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setAdapter(characterList: List<Results>) {
-        characterAdapter = CharacterAdapter(characterList) { character ->
+        characterAdapter = CharacterAdapter(characterList, { character ->
             Timber.tag("Click").i(character.name)
             findNavController().navigate(R.id.action_homeFragment_to_detailFragment,
                 Bundle().apply {
                     putSerializable("CHARACTER", character)
                 })
-        }
+        })
     }
 
     private fun setRecyclerView(characterList: List<Results>) {

@@ -55,13 +55,25 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setAdapter(characterList: List<Results>){
-       characterAdapter = CharacterAdapter(characterList) { character ->
-           findNavController().navigate(R.id.action_favoriteFragment_to_detailFragment,
-               Bundle().apply{
-                   putSerializable("CHARACTER", character)
-               })
-       }
+       characterAdapter = CharacterAdapter(characterList, ::goToDetail, ::deleteCharacters)
+//           goToDetail(character)
+//       },
+//           { results ->
+//               deleteCharacters(results)
+//           })
     }
+
+    private fun goToDetail(result: Results) {
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment,
+            Bundle().apply {
+                putSerializable("CHARACTER", result)
+            })
+    }
+
+    private fun deleteCharacters(results: Results){
+        viewModel.deleteCharacter(results)
+    }
+
 
     private fun setRecycler(characterList: List<Results>){
         setAdapter(characterList)
