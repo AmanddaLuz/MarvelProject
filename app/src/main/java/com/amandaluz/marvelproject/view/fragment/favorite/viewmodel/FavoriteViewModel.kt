@@ -1,4 +1,4 @@
-package com.amandaluz.marvelproject.view.fragment.favorite
+package com.amandaluz.marvelproject.view.fragment.favorite.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

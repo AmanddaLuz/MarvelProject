@@ -1,10 +1,10 @@
 package com.amandaluz.marvelproject.view.fragment.home
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.amandaluz.marvelproject.R
@@ -16,6 +16,7 @@ import com.amandaluz.marvelproject.data.network.ApiService
 import com.amandaluz.marvelproject.data.repository.CharacterRepository
 import com.amandaluz.marvelproject.data.repository.CharactersRepositoryImpl
 import com.amandaluz.marvelproject.databinding.FragmentHomeBinding
+import com.amandaluz.marvelproject.util.ConfirmDialog
 import com.amandaluz.marvelproject.util.apikey
 import com.amandaluz.marvelproject.util.hash
 import com.amandaluz.marvelproject.util.ts
@@ -37,6 +38,7 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        setupToolbar()
         return binding.root
     }
 
@@ -47,25 +49,54 @@ class HomeFragment : BaseFragment() {
         repository = CharactersRepositoryImpl(ApiService.service)
         viewModel = HomeViewModel.HomeViewModelProviderFactory(repository, Dispatchers.IO)
             .create(HomeViewModel::class.java)
+
+        binding.includeToolbar.findCharacter.addTextChangedListener { inputText ->
+            inputText?.let {
+                searchCharacter(it.toString())
+            }
+        }
         checkConnection()
         observeVMEvents()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.search -> {
+                binding.includeToolbar.findCharacter.visibility = View.VISIBLE
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupToolbar(){
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity).setSupportActionBar(binding.includeToolbar.toolbarLayout)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
 
     override fun checkConnection() {
         if (hasInternet(context)) {
             getCharacters()
         } else {
-            AlertDialog.Builder(context)
-                .setTitle(getString(R.string.connection_error))
-                .setMessage(getString(R.string.verify_internet))
-                .setPositiveButton(getString(R.string.confirm)) { _, _ -> }
-                .show()
+            ConfirmDialog("Erro de conexão!", "Verifique sua internet e tente novamente!")
+                .show(parentFragmentManager, "Connection")
         }
     }
 
     private fun getCharacters() {
         val ts = ts()
         viewModel.getCharacters(apikey(), hash(ts), ts.toLong())
+    }
+
+    private fun searchCharacter(nameStart: String) {
+        val ts = ts()
+        viewModel.searchCharacter(nameStart, apikey(), hash(ts), ts.toLong())
     }
 
     private fun observeVMEvents() {
@@ -83,6 +114,24 @@ class HomeFragment : BaseFragment() {
                         Snackbar.make(binding.container, "Not found", Snackbar.LENGTH_INDEFINITE)
                     snack.setAction("Confirmar") {}
                     snack.show()
+                    Timber.tag("Error").i(it.error)
+                }
+                Status.LOADING -> {
+                    Timber.tag("Loading").i(it.loading.toString())
+                }
+            }
+        }
+
+        viewModel.search.observe(viewLifecycleOwner) {
+            if (viewLifecycleOwner.lifecycle.currentState != Lifecycle.State.RESUMED) return@observe
+            when (it.status) {
+                Status.SUCCESS -> {
+                    it.data?.let { searchResponse ->
+                        Timber.tag("Sucesso").i(searchResponse.toString())
+                        setRecyclerView(searchResponse.data.results)
+                    }
+                }
+                Status.ERROR -> {
                     Timber.tag("Error").i(it.error)
                 }
                 Status.LOADING -> {

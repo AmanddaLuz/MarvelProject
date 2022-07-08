@@ -13,10 +13,10 @@ import com.amandaluz.marvelproject.data.db.repository.DatabaseRepository
 import com.amandaluz.marvelproject.data.db.repository.DatabaseRepositoryImpl
 import com.amandaluz.marvelproject.data.model.Results
 import com.amandaluz.marvelproject.databinding.FragmentFavoriteBinding
+import com.amandaluz.marvelproject.util.ConfirmDialog
 import com.amandaluz.marvelproject.view.adapter.CharacterAdapter
-import kotlinx.coroutines.CoroutineDispatcher
+import com.amandaluz.marvelproject.view.fragment.favorite.viewmodel.FavoriteViewModel
 import kotlinx.coroutines.Dispatchers
-import timber.log.Timber
 
 class FavoriteFragment : Fragment() {
     lateinit var viewModel: FavoriteViewModel
@@ -56,24 +56,22 @@ class FavoriteFragment : Fragment() {
 
     private fun setAdapter(characterList: List<Results>){
        characterAdapter = CharacterAdapter(characterList, ::goToDetail, ::deleteCharacters)
-//           goToDetail(character)
-//       },
-//           { results ->
-//               deleteCharacters(results)
-//           })
     }
 
     private fun goToDetail(result: Results) {
-        findNavController().navigate(R.id.action_homeFragment_to_detailFragment,
+        findNavController().navigate(R.id.action_favoriteFragment_to_detailFragment,
             Bundle().apply {
                 putSerializable("CHARACTER", result)
             })
     }
 
     private fun deleteCharacters(results: Results){
-        viewModel.deleteCharacter(results)
+        ConfirmDialog("Confirmação", "Tem certeza que gostaria de deletar este personagem?").apply {
+            setListener {
+                viewModel.deleteCharacter(results)
+            }
+        }.show(parentFragmentManager, "Dialog")
     }
-
 
     private fun setRecycler(characterList: List<Results>){
         setAdapter(characterList)
