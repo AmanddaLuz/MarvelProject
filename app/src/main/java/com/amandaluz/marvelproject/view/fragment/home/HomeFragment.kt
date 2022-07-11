@@ -2,9 +2,7 @@ package com.amandaluz.marvelproject.view.fragment.home
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.amandaluz.marvelproject.R
@@ -25,6 +23,7 @@ import com.amandaluz.marvelproject.view.fragment.home.viewmodel.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
+import androidx.appcompat.widget.SearchView
 
 class HomeFragment : BaseFragment() {
     lateinit var viewModel: HomeViewModel
@@ -50,42 +49,56 @@ class HomeFragment : BaseFragment() {
         viewModel = HomeViewModel.HomeViewModelProviderFactory(repository, Dispatchers.IO)
             .create(HomeViewModel::class.java)
 
-        binding.includeToolbar.findCharacter.addTextChangedListener { inputText ->
-            inputText?.let {
-                searchCharacter(it.toString())
-            }
-        }
         checkConnection()
         observeVMEvents()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+    private fun search(menu: Menu) {
+        val search = menu.findItem(R.id.search)
+        val searchView = search.actionView as SearchView
+        searchView.queryHint = "Pesquisar"
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.search -> {
-                binding.includeToolbar.findCharacter.visibility = View.VISIBLE
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                when (newText) {
+                    "" -> getCharacters()
+                    else
+                    -> searchCharacter(newText.toString())
+                }
+                return false
             }
-        }
-        return super.onOptionsItemSelected(item)
+
+        })
     }
 
-    private fun setupToolbar(){
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.toolbar_menu, menu)
+        search(menu)
+    }
+
+    private fun setupToolbar() {
         setHasOptionsMenu(true)
         (activity as AppCompatActivity).setSupportActionBar(binding.includeToolbar.toolbarLayout)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
-
     override fun checkConnection() {
         if (hasInternet(context)) {
             getCharacters()
         } else {
-            ConfirmDialog("Erro de conexão!", "Verifique sua internet e tente novamente!")
-                .show(parentFragmentManager, "Connection")
+            ConfirmDialog(
+                "Erro de conexão",
+                "Verifique sua internet e tente novamente",
+            "Tentar novamente",
+            "Cancelar")
+                .apply {
+                    setListener {
+                        checkConnection()
+                    }
+                }.show(parentFragmentManager, "Connection")
         }
     }
 
@@ -110,10 +123,12 @@ class HomeFragment : BaseFragment() {
                     }
                 }
                 Status.ERROR -> {
-                    val snack =
-                        Snackbar.make(binding.container, "Not found", Snackbar.LENGTH_INDEFINITE)
-                    snack.setAction("Confirmar") {}
-                    snack.show()
+//                    val snack =
+//                        Snackbar.make(binding.container, "Not found", Snackbar.LENGTH_INDEFINITE)
+//                    snack.setAction("Confirmar") {
+//                        checkConnection()
+//                    }
+//                    snack.show()
                     Timber.tag("Error").i(it.error)
                 }
                 Status.LOADING -> {
