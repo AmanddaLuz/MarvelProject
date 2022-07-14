@@ -90,10 +90,11 @@ class HomeFragment : BaseFragment() {
             getCharacters()
         } else {
             ConfirmDialog(
-                "Erro de conexão",
-                "Verifique sua internet e tente novamente",
-            "Tentar novamente",
-            "Cancelar")
+                getString(R.string.dialogTitleConnection),
+                getString(R.string.dialogMessageConnection),
+                getString(R.string.dialogButtonConnection),
+                getString(R.string.dialogButtonNotConnection)
+            )
                 .apply {
                     setListener {
                         checkConnection()
@@ -123,12 +124,12 @@ class HomeFragment : BaseFragment() {
                     }
                 }
                 Status.ERROR -> {
-//                    val snack =
-//                        Snackbar.make(binding.container, "Not found", Snackbar.LENGTH_INDEFINITE)
-//                    snack.setAction("Confirmar") {
-//                        checkConnection()
-//                    }
-//                    snack.show()
+                    val snack =
+                        Snackbar.make(binding.container, "Not found", Snackbar.LENGTH_INDEFINITE)
+                    snack.setAction("Confirmar") {
+                        checkConnection()
+                    }
+                    snack.show()
                     Timber.tag("Error").i(it.error)
                 }
                 Status.LOADING -> {

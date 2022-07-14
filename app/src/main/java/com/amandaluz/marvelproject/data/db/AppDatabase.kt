@@ -27,9 +27,7 @@ abstract class AppDatabase: RoomDatabase() {
 
         fun getDb(context: Context): AppDatabase {
             val tempInstance = INSTANCE
-//            tempInstance?.let {
-//                return tempInstance
-//            }
+
             if (tempInstance != null){
                 return tempInstance
             }

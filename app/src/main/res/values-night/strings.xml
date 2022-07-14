@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="description">asdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKKasdasdadajsdnaisdnaKKKKKKKKKKKKKKKKKKKKKK</string>
+    <string name="dialogTitleDeleteCharacter">Confirmação</string>
+    <string name="dialogMessageDeleteCharacter">Tem certeza que gostaria de deletar este personagem?</string>
+    <string name="dialogButtonDeleteCharacter">Deletar</string>
+    <string name="dialogButtonNotDeleteCharacter">Não</string>
+    <string name="dialogTitleConnection">Erro de conexão</string>
+    <string name="dialogMessageConnection">Verifique sua internet e tente novamente</string>
+    <string name="dialogButtonConnection">Tentar novamente</string>
+    <string name="dialogButtonNotConnection">Cancelar</string>
+
 </resources>

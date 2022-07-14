@@ -19,7 +19,7 @@
             app:textAllCaps="true"
             android:textColor="@color/white"
             android:fontFamily="@font/marvel_font"
-            android:textSize="32sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
 </androidx.appcompat.widget.Toolbar>

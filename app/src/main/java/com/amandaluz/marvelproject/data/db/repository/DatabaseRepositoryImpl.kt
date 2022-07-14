@@ -13,6 +13,4 @@ class DatabaseRepositoryImpl(private val dao: CharacterDAO): DatabaseRepository 
 
     override suspend fun getFavoriteCharacter(characterId: Long): Results? =
         dao.getFavoriteCharacter(characterId)
-
-
 }
