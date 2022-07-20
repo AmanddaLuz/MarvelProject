@@ -1,7 +1,13 @@
 package com.amandaluz.marvelproject.view.fragment.home
 
+import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.*
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
@@ -24,6 +30,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 import androidx.appcompat.widget.SearchView
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.core.view.forEach
 
 class HomeFragment : BaseFragment() {
     lateinit var viewModel: HomeViewModel
@@ -31,6 +39,7 @@ class HomeFragment : BaseFragment() {
 
     lateinit var binding: FragmentHomeBinding
     private lateinit var characterAdapter: CharacterAdapter
+    private var offsetCharacters: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,13 +72,12 @@ class HomeFragment : BaseFragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 when (newText) {
-                    "" -> getCharacters()
+                    "" -> getCharacters(offset = offsetCharacters)
                     else
                     -> searchCharacter(newText.toString())
                 }
                 return false
             }
-
         })
     }
 
@@ -77,6 +85,22 @@ class HomeFragment : BaseFragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.toolbar_menu, menu)
         search(menu)
+        setupPagination(menu)
+    }
+
+    private fun setupPagination(menu: Menu) {
+        binding.fabItemNext.setOnClickListener {
+            if (offsetCharacters >= 0) {
+                offsetCharacters += 50
+                getCharacters(offset = offsetCharacters)
+            }
+        }
+        binding.fabItemPrevious.setOnClickListener {
+            if (offsetCharacters >= 50) {
+                offsetCharacters -= 50
+                getCharacters(offset = offsetCharacters)
+            }
+        }
     }
 
     private fun setupToolbar() {
@@ -103,9 +127,9 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun getCharacters() {
+    private fun getCharacters(limit: Int = 50, offset: Int = 0) {
         val ts = ts()
-        viewModel.getCharacters(apikey(), hash(ts), ts.toLong())
+        viewModel.getCharacters(apikey(), hash(ts), ts.toLong(), limit, offset)
     }
 
     private fun searchCharacter(nameStart: String) {
@@ -156,6 +180,7 @@ class HomeFragment : BaseFragment() {
             }
         }
     }
+
 
     private fun setAdapter(characterList: List<Results>) {
         characterAdapter = CharacterAdapter(characterList, { character ->

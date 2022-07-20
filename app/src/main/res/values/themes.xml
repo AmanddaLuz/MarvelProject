@@ -41,4 +41,11 @@
     <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.MarvelProject.Button.Cut" parent="">
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerSizeTopLeft">12dp</item>
+        <item name="cornerSizeBottomRight">12dp</item>
+    </style>
 </resources>

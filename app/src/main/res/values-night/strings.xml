@@ -9,5 +9,8 @@
     <string name="dialogMessageConnection">Verifique sua internet e tente novamente</string>
     <string name="dialogButtonConnection">Tentar novamente</string>
     <string name="dialogButtonNotConnection">Cancelar</string>
+    <string name="user_hint">Usuário</string>
+    <string name="password_hint">Senha</string>
+    <string name="button_name_login">LOGIN</string>
 
 </resources>
