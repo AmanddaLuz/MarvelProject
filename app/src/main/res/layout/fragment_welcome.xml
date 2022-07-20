@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:text="Seja bem-vindo(A)"
+        android:text="@string/welcome_title"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="32sp"
@@ -26,32 +26,28 @@
         android:id="@+id/welcome_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="11:9"
-        android:layout_marginTop="64dp"
         android:src="@drawable/image_welcome"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/materialButton3"
+        app:layout_constraintDimensionRatio="11:9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="80dp"
         android:backgroundTint="#DA0910"
         android:elevation="4dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="Ir para a página inicial"
+        android:text="@string/btn_welcome"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_image"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MarvelProject.Button.Cut"
         app:strokeColor="@color/black"
         app:strokeWidth="1dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="1.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

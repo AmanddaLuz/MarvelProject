@@ -12,5 +12,17 @@
     <string name="user_hint">Usuário</string>
     <string name="password_hint">Senha</string>
     <string name="button_name_login">LOGIN</string>
+    <string name="name_hint_account">Nome</string>
+    <string name="email_hint_account">Email</string>
+    <string name="confirme_email_hint_account">Confirme seu email</string>
+    <string name="btn_back_account">VOLTAR</string>
+    <string name="btn_confirm_account">CONFIRMAR</string>
+    <string name="create_account_text">Crie sua conta</string>
+    <string name="photo_text">ESCOLHA SUA FOTO</string>
+    <string name="photo_subtitle_text">Definir mais tarde</string>
+    <string name="hint_password">Senha</string>
+    <string name="hint_confirm_password">Confirme sua senha</string>
+    <string name="welcome_title">Seja bem-vindo(A)</string>
+    <string name="btn_welcome">Ir para a página inicial</string>
 
 </resources>

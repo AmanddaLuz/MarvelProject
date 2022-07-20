@@ -11,8 +11,8 @@
         android:id="@+id/register_pick_your_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="184dp"
-        android:text="ESCOLHA SUA FOTO"
+        android:layout_marginTop="60dp"
+        android:text="@string/photo_text"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -22,10 +22,13 @@
 
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView
         android:id="@+id/register_cardview"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:cardCornerRadius="200dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintBottom_toTopOf="@+id/materialButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/register_pick_your_photo"
@@ -37,15 +40,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/register_image" />
-
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/register_choose_later"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Definir mais tarde"
-        android:layout_marginTop="8dp"
+        android:text="@string/photo_subtitle_text"
+        android:layout_marginTop="16dp"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/register_cardview"
@@ -54,42 +56,39 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButton"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="24dp"
         android:backgroundTint="#DA0910"
         android:elevation="4dp"
-        android:text="VOLTAR"
+        android:textAllCaps="true"
+        android:text="@string/btn_back_account"
+        app:layout_constraintBottom_toBottomOf="@+id/materialButton2"
         app:layout_constraintEnd_toStartOf="@+id/materialButton2"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register_cardview"
+        app:layout_constraintTop_toTopOf="@+id/materialButton2"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MarvelProject.Button.Cut"
         app:strokeColor="@color/black"
         app:strokeWidth="1dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButton2"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="80dp"
         android:backgroundTint="#DA0910"
         android:elevation="4dp"
-        android:text="CONFIRMAR"
+        android:textAllCaps="true"
+        android:text="@string/btn_confirm_account"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/materialButton"
-        app:layout_constraintTop_toBottomOf="@id/register_cardview"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MarvelProject.Button.Cut"
         app:strokeColor="@color/black"
         app:strokeWidth="1dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="1.3"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
