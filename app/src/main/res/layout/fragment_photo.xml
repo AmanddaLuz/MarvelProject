@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".view.login.register.RegisterActivity">
+    tools:context=".view.login.register.fragment.photofragment.PhotoFragment">
 
-    <com.google.android.material.textview.MaterialTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/register_pick_your_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:src="@drawable/register_image" />
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
-    <com.google.android.material.textview.MaterialTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/register_choose_later"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

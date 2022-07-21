@@ -38,4 +38,5 @@
     <string name="hint_confirm_password">Confirme sua senha</string>
     <string name="welcome_title">Seja bem-vindo(A)</string>
     <string name="btn_welcome">Ir para a página inicial</string>
+    <string name="text_password">Defina sua senha</string>
 </resources>
