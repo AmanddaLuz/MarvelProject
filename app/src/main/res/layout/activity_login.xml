@@ -37,7 +37,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_username_edit"
                 style="@style/Theme.MarvelProject.FormatEditText"
-                android:hint="@string/name_hint_account" />
+                android:hint="@string/user_hint" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,24 +67,20 @@
             android:layout_gravity="center"/>
     </LinearLayout>
 
-
-
-
-    <com.google.android.material.button.MaterialButton
+    <com.amandaluz.marvelproject.util.LoadingButton
         android:id="@+id/btn_login"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:backgroundTint="#DA0910"
         android:elevation="4dp"
         android:textAllCaps="true"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="180dp"
-        android:text="@string/button_name_login"
+        app:text="Teste"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MarvelProject.Button.Cut"
         app:strokeColor="@color/black"
         app:strokeWidth="1dp" />
 

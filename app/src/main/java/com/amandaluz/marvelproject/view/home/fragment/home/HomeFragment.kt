@@ -1,13 +1,7 @@
-package com.amandaluz.marvelproject.view.fragment.home
+package com.amandaluz.marvelproject.view.home.fragment.home
 
-import android.content.Context
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.*
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
-import android.view.animation.RotateAnimation
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
@@ -25,13 +19,11 @@ import com.amandaluz.marvelproject.util.apikey
 import com.amandaluz.marvelproject.util.hash
 import com.amandaluz.marvelproject.util.ts
 import com.amandaluz.marvelproject.view.adapter.CharacterAdapter
-import com.amandaluz.marvelproject.view.fragment.home.viewmodel.HomeViewModel
+import com.amandaluz.marvelproject.view.home.fragment.home.viewmodel.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 import androidx.appcompat.widget.SearchView
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-import androidx.core.view.forEach
 
 class HomeFragment : BaseFragment() {
     lateinit var viewModel: HomeViewModel
