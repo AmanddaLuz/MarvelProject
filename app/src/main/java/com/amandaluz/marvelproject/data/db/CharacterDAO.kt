@@ -26,4 +26,5 @@ interface CharacterDAO {
     @Query("SELECT * FROM results_table WHERE id= :characterId")
     suspend fun getFavoriteCharacter(characterId: Long): Results?
 
+
 }
