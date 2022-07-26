@@ -12,5 +12,4 @@ fun TextInputLayout.setError(context: Context, stringResId: Int?) {
 
 fun Context.toast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    return toast(message)
 }

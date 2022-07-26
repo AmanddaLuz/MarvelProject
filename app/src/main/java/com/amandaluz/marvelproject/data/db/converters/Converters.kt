@@ -26,6 +26,17 @@ class Converters {
     }
 
     @TypeConverter
+    fun fromListFavourites(listFavourites: List<Results?>): String =
+        Gson().toJson(listFavourites)
+
+    @TypeConverter
+    fun toListFavourites(string: String): List<Results?>{
+        val listType: Type = object :
+            TypeToken<List<Results?>?>() {}.type
+        return Gson().fromJson<List<Results?>>(string, listType)
+    }
+
+    @TypeConverter
     fun fromListUrls(urls: List<Url>): String = Gson().toJson(urls)
 
     @TypeConverter

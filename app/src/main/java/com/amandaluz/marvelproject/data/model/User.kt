@@ -1,5 +1,6 @@
 package com.amandaluz.marvelproject.data.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,5 +10,6 @@ data class User(
     val email: String,
     val name: String,
     val password: String,
-    val photo: Int? = null
+    val photo: Int? = null,
+    val favourites: List<Results>
 )
