@@ -29,5 +29,6 @@ data class Results(
     @SerializedName("thumbnail")
     val thumbnail: Thumbnail,
     @SerializedName("urls")
-    val urls: List<Url>
+    val urls: List<Url>,
+    val email: String?
 ): Serializable

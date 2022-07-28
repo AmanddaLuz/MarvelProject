@@ -1,5 +1,6 @@
 package com.amandaluz.marvelproject.view.login.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -16,6 +17,7 @@ import com.amandaluz.marvelproject.databinding.ActivityLoginBinding
 import com.amandaluz.marvelproject.util.Watcher
 import com.amandaluz.marvelproject.util.setError
 import com.amandaluz.marvelproject.util.toast
+import com.amandaluz.marvelproject.view.home.activity.HomeActivity
 import com.amandaluz.marvelproject.view.login.viewmodel.LoginViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -69,16 +71,25 @@ class LoginActivity : AppCompatActivity() {
             when (it.status) {
                 Status.SUCCESS -> {
                     it.data?.let { user ->
-                        toast("Sucesso ${user.name}")
-                        //Toast.makeText(this, "Login com Sucesso ${user.name}", Toast.LENGTH_SHORT).show()
+                        goTo(user, HomeActivity::class.java)
                     }
                 }
                 Status.ERROR -> {
+                    toast("Erro ao logar!")
                     Timber.tag("Login").i(it.error)
                 }
                 Status.LOADING -> {}
             }
         }
+    }
+
+    private fun <T> goTo(user: User?, clazz: Class<T>) {
+        val intent = Intent(this@LoginActivity, clazz)
+        user?.let {
+            intent.putExtra("USER", user)
+        }
+        startActivity(intent)
+        finish()
     }
 }
 

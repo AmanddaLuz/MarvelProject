@@ -2,6 +2,7 @@ package com.amandaluz.marvelproject.view.home.fragment.home
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 import androidx.appcompat.widget.SearchView
+import com.amandaluz.marvelproject.data.model.User
 
 class HomeFragment : BaseFragment() {
     lateinit var viewModel: HomeViewModel
@@ -32,6 +34,7 @@ class HomeFragment : BaseFragment() {
     lateinit var binding: FragmentHomeBinding
     private lateinit var characterAdapter: CharacterAdapter
     private var offsetCharacters: Int = 0
+    private lateinit var user: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +52,11 @@ class HomeFragment : BaseFragment() {
         repository = CharactersRepositoryImpl(ApiService.service)
         viewModel = HomeViewModel.HomeViewModelProviderFactory(repository, Dispatchers.IO)
             .create(HomeViewModel::class.java)
+
+        activity?.let {
+            user = it.intent.getSerializableExtra("USER") as User
+        }
+        Toast.makeText(context, "o usuario é ${user.name}", Toast.LENGTH_SHORT).show()
 
         checkConnection()
         observeVMEvents()
@@ -77,10 +85,10 @@ class HomeFragment : BaseFragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.toolbar_menu, menu)
         search(menu)
-        setupPagination(menu)
+        setupPagination()
     }
 
-    private fun setupPagination(menu: Menu) {
+    private fun setupPagination() {
         binding.fabItemNext.setOnClickListener {
             if (offsetCharacters >= 0) {
                 offsetCharacters += 50
