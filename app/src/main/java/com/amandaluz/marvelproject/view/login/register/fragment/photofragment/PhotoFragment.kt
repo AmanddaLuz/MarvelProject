@@ -57,7 +57,7 @@ class PhotoFragment : Fragment() {
             .create(PhotoViewModel::class.java)
 
         clickToChoosePhoto()
-        insertUserOnDatabase()
+        insertUserOnDatabase(user)
         createUserWithoutPhoto()
         observeVMEvents()
     }
@@ -80,11 +80,20 @@ class PhotoFragment : Fragment() {
         }
     }
 
-    private fun insertUserOnDatabase() {
+    private fun insertUserOnDatabase(user: User) {
         binding.materialButton2.setOnClickListener {
-            val finalUser = user.copy(photo = uriImage)
-            viewModel.insertNewUserOnDatabase(finalUser)
+            if (uriImage != null){
+                makeUserWithPhotoOrNot(user)
+            } else {
+                uriImage = Uri.parse("")
+                makeUserWithPhotoOrNot(user)
+            }
         }
+    }
+
+    private fun makeUserWithPhotoOrNot(user: User){
+        val finalUser = user.copy(photo = uriImage)
+        viewModel.insertNewUserOnDatabase(finalUser)
     }
 
     private fun gallery() =

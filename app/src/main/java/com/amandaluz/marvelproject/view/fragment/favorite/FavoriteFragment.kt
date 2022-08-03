@@ -103,7 +103,8 @@ class FavoriteFragment : Fragment() {
         )
             .apply {
                 setListener {
-                    viewModel.deleteCharacter(favorite)
+                    val newfavorite = favorite.copy(email = user.email)
+                    viewModel.deleteCharacter(newfavorite)
                 }
             }.show(parentFragmentManager, "Dialog")
     }

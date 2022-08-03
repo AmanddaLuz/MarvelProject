@@ -18,7 +18,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/red_700</item>
         <item name="colorPrimaryVariant">@color/red_status_bar</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">#F8F6F6</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/red_secondary</item>
         <item name="colorSecondaryVariant">@color/red_500</item>
