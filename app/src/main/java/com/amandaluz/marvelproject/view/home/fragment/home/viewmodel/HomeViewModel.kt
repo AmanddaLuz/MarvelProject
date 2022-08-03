@@ -18,18 +18,18 @@ class HomeViewModel(
     val response: LiveData<State<CharacterResponse>> = _response
 
     private val _search = MutableLiveData<State<CharacterResponse>>()
-    val search: LiveData<State<CharacterResponse>>
-    get() = _search
+    val search: LiveData<State<CharacterResponse>> = _search
 
-    fun getCharacters(apikey: String, hash: String, ts: Long,limit: Int, offset: Int = 0) {
+    fun getCharacters(apikey: String, hash: String, ts: Long, limit: Int, offset: Int) {
         viewModelScope.launch {
             try {
                 _response.value = State.loading(true)
+
                 val response = withContext(ioDispatcher) {
                     repository.getCharacters(apikey, hash, ts, limit, offset)
                 }
-                _response.value = State.success(response)
                 _response.value = State.loading(false)
+                _response.value = State.success(response)
             } catch (throwable: Throwable) {
                 _response.value = State.error(throwable)
                 _response.value = State.loading(false)
@@ -61,8 +61,7 @@ class HomeViewModel(
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
                 return HomeViewModel(repository, ioDispatcher) as T
             }
-            throw IllegalArgumentException("Unknow viewModel Class")
+            throw IllegalArgumentException("Unknown viewModel Class")
         }
     }
 }
-

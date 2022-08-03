@@ -51,8 +51,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/full_name_edit"
                 style="@style/Theme.MarvelProject.FormatEditText"
-                android:hint="@string/name_hint_account"
-                android:textAllCaps="true" />
+                android:hint="@string/name_hint_account" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,8 +66,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_edit"
                 style="@style/Theme.MarvelProject.FormatEditText"
-                android:hint="@string/email_hint_account"
-                android:textAllCaps="true" />
+                android:hint="@string/email_hint_account" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,8 +81,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_confirmation_edit"
                 style="@style/Theme.MarvelProject.FormatEditText"
-                android:hint="@string/email_hint_account"
-                android:textAllCaps="true" />
+                android:hint="@string/email_hint_account" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>

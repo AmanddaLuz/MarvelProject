@@ -30,11 +30,9 @@ import com.amandaluz.marvelproject.data.model.User
 class HomeFragment : BaseFragment() {
     lateinit var viewModel: HomeViewModel
     lateinit var repository: CharacterRepository
-
     lateinit var binding: FragmentHomeBinding
     private lateinit var characterAdapter: CharacterAdapter
     private var offsetCharacters: Int = 0
-    private lateinit var user: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +51,7 @@ class HomeFragment : BaseFragment() {
         viewModel = HomeViewModel.HomeViewModelProviderFactory(repository, Dispatchers.IO)
             .create(HomeViewModel::class.java)
 
+        paginationSetup()
         checkConnection()
         observeVMEvents()
     }
@@ -64,12 +63,14 @@ class HomeFragment : BaseFragment() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 when (newText) {
-                    "" -> getCharacters(offset = offsetCharacters)
-                    else
-                    -> searchCharacter(newText.toString())
+                    "" -> {
+                        getCharacters(offset = offsetCharacters)
+                    }
+                    else -> {
+                        searchCharacter(newText.toString())
+                    }
                 }
                 return false
             }
@@ -77,13 +78,12 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.toolbar_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
         search(menu)
-        setupPagination()
     }
 
-    private fun setupPagination() {
+    private fun paginationSetup() {
         binding.fabItemNext.setOnClickListener {
             if (offsetCharacters >= 0) {
                 offsetCharacters += 50
@@ -113,12 +113,11 @@ class HomeFragment : BaseFragment() {
                 getString(R.string.dialogMessageConnection),
                 getString(R.string.dialogButtonConnection),
                 getString(R.string.dialogButtonNotConnection)
-            )
-                .apply {
-                    setListener {
-                        checkConnection()
-                    }
-                }.show(parentFragmentManager, "Connection")
+            ).apply {
+                setListener {
+                    checkConnection()
+                }
+            }.show(parentFragmentManager, "Connection")
         }
     }
 
@@ -143,12 +142,6 @@ class HomeFragment : BaseFragment() {
                     }
                 }
                 Status.ERROR -> {
-                    val snack =
-                        Snackbar.make(binding.container, "Not found", Snackbar.LENGTH_INDEFINITE)
-                    snack.setAction("Confirmar") {
-                        checkConnection()
-                    }
-                    snack.show()
                     Timber.tag("Error").i(it.error)
                 }
                 Status.LOADING -> {
@@ -176,10 +169,9 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-
     private fun setAdapter(characterList: List<Results>) {
         characterAdapter = CharacterAdapter(characterList, {
-            //Timber.tag("Click").i(character.name)
+            Timber.tag("Click").i(it.name)
             findNavController().navigate(R.id.action_homeFragment_to_detailFragment,
                 Bundle().apply {
                     putParcelable("FAVORITE", it)

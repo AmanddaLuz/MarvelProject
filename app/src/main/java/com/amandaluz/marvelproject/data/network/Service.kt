@@ -19,7 +19,6 @@ interface Service {
         @Query("nameStartsWith") nameStartsWith: String,
         @Query("apikey") apikey: String,
         @Query("hash") hash: String,
-        @Query("ts") ts: Long,
-        @Query("offset") offset: Int? = 100,
+        @Query("ts") ts: Long
         ): CharacterResponse
 }
