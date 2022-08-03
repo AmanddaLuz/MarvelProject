@@ -18,6 +18,7 @@ import com.amandaluz.marvelproject.util.Watcher
 import com.amandaluz.marvelproject.util.setError
 import com.amandaluz.marvelproject.util.toast
 import com.amandaluz.marvelproject.view.home.activity.HomeActivity
+import com.amandaluz.marvelproject.view.login.register.RegisterActivity
 import com.amandaluz.marvelproject.view.login.viewmodel.LoginViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -41,14 +42,25 @@ class LoginActivity : AppCompatActivity() {
         observeVMEvents()
 
         binding.run {
-            btnLogin.setOnClickListener {
-                val email = binding.loginUsernameEdit.text.toString()
-                val password = binding.loginPasswordEdit.text.toString()
-
-                viewModel.login(email, password)
-            }
+            onClickLoginButton()
+            goToRegister()
             loginUsernameEdit.addTextChangedListener(watcher)
             loginPasswordEdit.addTextChangedListener(watcher)
+        }
+    }
+
+    private fun ActivityLoginBinding.goToRegister() {
+        loginRegisterButton.setOnClickListener {
+            goTo(null, RegisterActivity::class.java)
+        }
+    }
+
+    private fun ActivityLoginBinding.onClickLoginButton() {
+        btnLogin.setOnClickListener {
+            val email = binding.loginUsernameEdit.text.toString()
+            val password = binding.loginPasswordEdit.text.toString()
+
+            viewModel.login(email, password)
         }
     }
 

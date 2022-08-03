@@ -1,5 +1,6 @@
 package com.amandaluz.marvelproject.data.db.converters
 
+import android.net.Uri
 import androidx.room.TypeConverter
 import com.amandaluz.marvelproject.data.model.*
 import com.google.gson.Gson
@@ -62,5 +63,13 @@ class Converters {
 
     @TypeConverter
     fun toEvents(string: String): Events = Gson().fromJson(string, Events::class.java)
+
+    @TypeConverter
+    fun fromUri(uri: Uri): String =
+        uri.toString()
+
+    @TypeConverter
+    fun toUri(string: String): Uri =
+        Uri.parse(string)
 
 }

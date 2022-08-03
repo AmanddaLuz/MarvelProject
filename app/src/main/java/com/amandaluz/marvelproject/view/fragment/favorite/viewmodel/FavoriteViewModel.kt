@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amandaluz.marvelproject.core.State
 import com.amandaluz.marvelproject.data.db.repository.DatabaseRepository
+import com.amandaluz.marvelproject.data.model.Favorites
 import com.amandaluz.marvelproject.data.model.Results
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -17,16 +18,16 @@ class FavoriteViewModel(
     private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    fun getCharacters() = repository.getAllCharacters()
-
     private val _delete = MutableLiveData<State<Boolean>>()
     val delete: LiveData<State<Boolean>> = _delete
 
-    fun deleteCharacter(results: Results) = viewModelScope.launch {
+    fun getCharacters(email: String) = repository.getAllCharactersByUser(email)
+
+    fun deleteCharacter(favorite: Favorites) = viewModelScope.launch {
         try {
             _delete.value = State.loading(true)
             withContext(ioDispatcher) {
-                repository.deleteCharacter(results)
+                repository.deleteCharacter(favorite)
             }
             _delete.value = State.loading(false)
             _delete.value = State.success(true)

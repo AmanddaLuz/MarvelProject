@@ -53,11 +53,6 @@ class HomeFragment : BaseFragment() {
         viewModel = HomeViewModel.HomeViewModelProviderFactory(repository, Dispatchers.IO)
             .create(HomeViewModel::class.java)
 
-        activity?.let {
-            user = it.intent.getSerializableExtra("USER") as User
-        }
-        Toast.makeText(context, "o usuario é ${user.name}", Toast.LENGTH_SHORT).show()
-
         checkConnection()
         observeVMEvents()
     }
@@ -183,11 +178,11 @@ class HomeFragment : BaseFragment() {
 
 
     private fun setAdapter(characterList: List<Results>) {
-        characterAdapter = CharacterAdapter(characterList, { character ->
-            Timber.tag("Click").i(character.name)
+        characterAdapter = CharacterAdapter(characterList, {
+            //Timber.tag("Click").i(character.name)
             findNavController().navigate(R.id.action_homeFragment_to_detailFragment,
                 Bundle().apply {
-                    putSerializable("CHARACTER", character)
+                    putParcelable("FAVORITE", it)
                 })
         })
     }

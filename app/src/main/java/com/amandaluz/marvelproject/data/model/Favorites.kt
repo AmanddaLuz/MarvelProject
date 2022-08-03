@@ -2,13 +2,12 @@ package com.amandaluz.marvelproject.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.io.Serializable
 
+@Entity(tableName = "favorites_table", primaryKeys = ["id", "email"])
 @Parcelize
-data class Results(
+data class Favorites(
     @SerializedName("id")
     val id: Long,
     @SerializedName("comics")
@@ -30,5 +29,7 @@ data class Results(
     @SerializedName("thumbnail")
     val thumbnail: Thumbnail,
     @SerializedName("urls")
-    val urls: List<Url>
+    val urls: List<Url>,
+    val email: String
 ): Parcelable
+

@@ -3,12 +3,13 @@ package com.amandaluz.marvelproject.view.fragment.detail.viewmodel
 import androidx.lifecycle.*
 import com.amandaluz.marvelproject.core.State
 import com.amandaluz.marvelproject.data.db.repository.DatabaseRepository
+import com.amandaluz.marvelproject.data.model.Favorites
 import com.amandaluz.marvelproject.data.model.Results
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import java.lang.IllegalArgumentException
+import kotlin.Exception
 
 class DetailViewModel(
     private val databaseRepository: DatabaseRepository,
@@ -22,7 +23,8 @@ class DetailViewModel(
     private val _delete = MutableLiveData<State<Boolean>>()
     val delete : LiveData<State<Boolean>>
         get() = _delete
-    fun insertCharacters(result: Results) {
+
+    fun insertCharacters(result: Favorites) {
         viewModelScope.launch {
             try {
                 withContext(ioDispatcher) {
@@ -35,11 +37,21 @@ class DetailViewModel(
         }
     }
 
-    fun verifySavedCharacter(characterId: Long){
+    fun insertFavorite(favorite: Favorites){
+        viewModelScope.launch {
+            try {
+                databaseRepository.insertFavorite(favorite)
+            } catch (e: Exception){
+                //Timber
+            }
+        }
+    }
+
+    fun verifySavedCharacter(characterId: Long, email: String){
         viewModelScope.launch {
             try {
                 val result = withContext(ioDispatcher){
-                    databaseRepository.getFavoriteCharacter(characterId)
+                    databaseRepository.getFavouriteCharacterByUser(characterId, email)
                 }
                 _verifyCharacter.value = State.success(result != null)
 
@@ -49,11 +61,11 @@ class DetailViewModel(
         }
     }
 
-    fun deleteCharacter(results: Results) = viewModelScope.launch {
+    fun deleteCharacter(favorite: Favorites) = viewModelScope.launch {
         try {
             _delete.value = State.loading(true)
             withContext(ioDispatcher) {
-                databaseRepository.deleteCharacter(results)
+                databaseRepository.deleteCharacter(favorite)
             }
             _delete.value = State.loading(false)
             _delete.value = State.success(true)
