@@ -21,14 +21,8 @@ abstract class AppDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        val MIGRATION_1_2: Migration = object : Migration(1, 2){
+        private val MIGRATION_1_2: Migration = object : Migration(1, 2){
             override fun migrate(database: SupportSQLiteDatabase) {
-//                database.execSQL("CREATE TABLE IF NOT EXISTS user_table(" +
-//                        "`email` TEXT NOT NULL," +
-//                        "`name` TEXT NOT NULL," +
-//                        "`password` TEXT NOT NULL," +
-//                        "`photo` INT," +
-//                        "PRIMARY KEY (`email`))")
                 //include sql command to update database
             }
         }
