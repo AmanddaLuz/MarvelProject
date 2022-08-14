@@ -47,6 +47,11 @@ class LoginActivity : AppCompatActivity() {
             loginUsernameEdit.addTextChangedListener(watcher)
             loginPasswordEdit.addTextChangedListener(watcher)
         }
+        binding.run {
+            loginUsernameEdit.setText("a@gmail.com")
+            loginPasswordEdit.setText("11111111")
+        }
+
     }
 
     private fun ActivityLoginBinding.goToRegister() {
