@@ -81,7 +81,7 @@ class PhotoFragment : Fragment() {
     }
 
     private fun insertUserOnDatabase(user: User) {
-        binding.materialButton2.setOnClickListener {
+        binding.btnConfirm.setOnClickListener {
             if (uriImage != null){
                 makeUserWithPhotoOrNot(user)
             } else {

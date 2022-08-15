@@ -18,7 +18,8 @@ import com.bumptech.glide.request.target.ViewTarget
 import kotlin.math.roundToInt
 
 class CarouselAdapter(
-    private val itemList: List<Result>
+    private val itemList: List<Result>,
+    private val click: (item: Result) -> Unit
 ) : RecyclerView.Adapter<CarouselAdapter.MyViewHolder>() {
 
     private var hasInitParentDimensions = false
@@ -39,7 +40,11 @@ class CarouselAdapter(
 
         holder.run {
             layoutParamsConfiguration(category)
-            scrollToItemClicked(position)
+            itemView.setOnClickListener {
+                val rv = itemView.parent as RecyclerView
+                rv.smoothScrollToCenteredPosition(position)
+                click.invoke(category)
+            }
         }
     }
 

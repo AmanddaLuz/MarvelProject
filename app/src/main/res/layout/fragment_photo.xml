@@ -64,17 +64,17 @@
         android:elevation="4dp"
         android:textAllCaps="true"
         android:text="@string/btn_back_account"
-        app:layout_constraintBottom_toBottomOf="@+id/materialButton2"
-        app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_confirm"
+        app:layout_constraintEnd_toStartOf="@+id/btn_confirm"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/materialButton2"
+        app:layout_constraintTop_toTopOf="@+id/btn_confirm"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MarvelProject.Button.Cut"
         app:strokeColor="@color/black"
         app:strokeWidth="1dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton2"
+        android:id="@+id/btn_confirm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
