@@ -1,12 +1,8 @@
-package com.amandaluz.marvelproject.view.login.register.fragment.accountfragment.viewmodel
+package com.amandaluz.marvelproject.view.register.fragment.accountfragment.viewmodel
 
 import android.util.Patterns
 import androidx.lifecycle.*
 import com.amandaluz.marvelproject.R
-import com.amandaluz.marvelproject.core.State
-import com.amandaluz.marvelproject.data.model.User
-import com.amandaluz.marvelproject.view.login.repository.RegisterRepository
-import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 class AccountViewModel : ViewModel() {

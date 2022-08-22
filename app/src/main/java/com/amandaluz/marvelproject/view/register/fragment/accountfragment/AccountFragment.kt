@@ -1,20 +1,16 @@
-package com.amandaluz.marvelproject.view.login.register.fragment.accountfragment
+package com.amandaluz.marvelproject.view.register.fragment.accountfragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.amandaluz.marvelproject.R
-import com.amandaluz.marvelproject.data.db.CharacterDAO
 import com.amandaluz.marvelproject.data.model.User
 import com.amandaluz.marvelproject.databinding.FragmentAccountBinding
 import com.amandaluz.marvelproject.util.setError
-import com.amandaluz.marvelproject.view.login.register.fragment.accountfragment.viewmodel.AccountViewModel
-import com.amandaluz.marvelproject.view.login.repository.RegisterRepository
-import com.amandaluz.marvelproject.view.login.repository.RegisterRepositoryImpl
+import com.amandaluz.marvelproject.view.register.fragment.accountfragment.viewmodel.AccountViewModel
 
 class AccountFragment : Fragment() {
     private lateinit var binding: FragmentAccountBinding

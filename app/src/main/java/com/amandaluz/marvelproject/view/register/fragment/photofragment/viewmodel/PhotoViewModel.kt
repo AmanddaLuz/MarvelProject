@@ -1,4 +1,4 @@
-package com.amandaluz.marvelproject.view.login.register.fragment.photofragment.viewmodel
+package com.amandaluz.marvelproject.view.register.fragment.photofragment.viewmodel
 
 import androidx.lifecycle.*
 import com.amandaluz.marvelproject.core.State

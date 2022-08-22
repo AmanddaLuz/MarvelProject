@@ -1,4 +1,4 @@
-package com.amandaluz.marvelproject.view.login.register.fragment.passwordfragment
+package com.amandaluz.marvelproject.view.register.fragment.passwordfragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.data.model.User
 import com.amandaluz.marvelproject.databinding.FragmentPasswordBinding
 import com.amandaluz.marvelproject.util.setError
-import com.amandaluz.marvelproject.view.login.register.fragment.passwordfragment.viewmodel.PasswordViewModel
+import com.amandaluz.marvelproject.view.register.fragment.passwordfragment.viewmodel.PasswordViewModel
 
 class PasswordFragment : Fragment() {
 
@@ -35,6 +35,7 @@ class PasswordFragment : Fragment() {
 
         observeVMEvents()
         goToPhotoStep()
+        goBackButtom()
 
     }
 
@@ -64,6 +65,12 @@ class PasswordFragment : Fragment() {
         }
         viewModel.passwordIsDifferentFieldErrorResId.observe(viewLifecycleOwner) {
             binding.loginConfirmPasswordLayout.setError(requireContext(), it)
+        }
+    }
+
+    private fun goBackButtom(){
+        binding.btnBackPassword.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 }

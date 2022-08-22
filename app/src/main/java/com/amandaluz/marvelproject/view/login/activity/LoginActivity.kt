@@ -3,25 +3,19 @@ package com.amandaluz.marvelproject.view.login.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.annotation.RestrictTo
-import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.core.Status
 import com.amandaluz.marvelproject.data.db.AppDatabase
 import com.amandaluz.marvelproject.data.db.CharacterDAO
 import com.amandaluz.marvelproject.data.model.User
 import com.amandaluz.marvelproject.data.repository.loginrepository.LoginRepository
 import com.amandaluz.marvelproject.data.repository.loginrepository.LoginRepositoryImpl
-import com.amandaluz.marvelproject.data.repository.loginrepository.LoginRepositoryMock
 import com.amandaluz.marvelproject.databinding.ActivityLoginBinding
 import com.amandaluz.marvelproject.util.Watcher
 import com.amandaluz.marvelproject.util.setError
 import com.amandaluz.marvelproject.util.toast
 import com.amandaluz.marvelproject.view.home.activity.HomeActivity
-import com.amandaluz.marvelproject.view.login.register.RegisterActivity
+import com.amandaluz.marvelproject.view.register.RegisterActivity
 import com.amandaluz.marvelproject.view.login.viewmodel.LoginViewModel
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class LoginActivity : AppCompatActivity() {

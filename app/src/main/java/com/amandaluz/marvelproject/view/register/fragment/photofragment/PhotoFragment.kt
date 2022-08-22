@@ -1,4 +1,4 @@
-package com.amandaluz.marvelproject.view.login.register.fragment.photofragment
+package com.amandaluz.marvelproject.view.register.fragment.photofragment
 
 import android.net.Uri
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.amandaluz.marvelproject.data.db.CharacterDAO
 import com.amandaluz.marvelproject.data.model.User
 import com.amandaluz.marvelproject.databinding.FragmentPhotoBinding
 import com.amandaluz.marvelproject.util.toast
-import com.amandaluz.marvelproject.view.login.register.fragment.photofragment.viewmodel.PhotoViewModel
+import com.amandaluz.marvelproject.view.register.fragment.photofragment.viewmodel.PhotoViewModel
 import com.amandaluz.marvelproject.view.login.repository.RegisterRepository
 import com.amandaluz.marvelproject.view.login.repository.RegisterRepositoryImpl
 import kotlinx.coroutines.Dispatchers
@@ -60,6 +60,7 @@ class PhotoFragment : Fragment() {
         insertUserOnDatabase(user)
         createUserWithoutPhoto()
         observeVMEvents()
+        goBackButtom()
     }
 
     private fun createUserWithoutPhoto() {
@@ -125,5 +126,11 @@ class PhotoFragment : Fragment() {
             Bundle().apply {
                 putParcelable("REGISTER_USER", user)
             })
+    }
+
+    private fun goBackButtom(){
+        binding.btnBackPhoto.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 }

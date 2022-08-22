@@ -7,34 +7,50 @@
 
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.amandaluz.marvelproject.view.login.register.fragment.accountfragment.AccountFragment"
+        android:name="com.amandaluz.marvelproject.view.register.fragment.accountfragment.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" >
         <action
             android:id="@+id/action_accountFragment_to_passwordFragment"
-            app:destination="@id/passwordFragment" />
+            app:destination="@id/passwordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_rigth"/>
     </fragment>
     <fragment
         android:id="@+id/passwordFragment"
-        android:name="com.amandaluz.marvelproject.view.login.register.fragment.passwordfragment.PasswordFragment"
+        android:name="com.amandaluz.marvelproject.view.register.fragment.passwordfragment.PasswordFragment"
         android:label="fragment_password"
         tools:layout="@layout/fragment_password" >
         <action
             android:id="@+id/action_passwordFragment_to_photoFragment"
-            app:destination="@id/photoFragment" />
+            app:destination="@id/photoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_rigth"/>
     </fragment>
     <fragment
         android:id="@+id/photoFragment"
-        android:name="com.amandaluz.marvelproject.view.login.register.fragment.photofragment.PhotoFragment"
+        android:name="com.amandaluz.marvelproject.view.register.fragment.photofragment.PhotoFragment"
         android:label="fragment_photo"
         tools:layout="@layout/fragment_photo" >
         <action
             android:id="@+id/action_photoFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
+            app:destination="@id/welcomeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_rigth"/>
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.amandaluz.marvelproject.view.login.register.fragment.welcomefragment.WelcomeFragment"
+        android:name="com.amandaluz.marvelproject.view.register.fragment.welcomefragment.WelcomeFragment"
         android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" />
+        tools:layout="@layout/fragment_welcome"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_rigth"/>
 </navigation>

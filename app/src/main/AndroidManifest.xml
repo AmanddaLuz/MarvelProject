@@ -21,7 +21,7 @@
         android:theme="@style/Theme.NewMarvelTheme"
         tools:targetApi="31">
         <activity
-            android:name=".view.login.register.RegisterActivity"
+            android:name="com.amandaluz.marvelproject.view.register.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".view.login.activity.LoginActivity"

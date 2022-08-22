@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".view.login.register.fragment.photofragment.PhotoFragment">
+    tools:context=".view.register.fragment.photofragment.PhotoFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/register_pick_your_photo"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/btn_back_photo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -86,7 +86,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/materialButton"
+        app:layout_constraintStart_toEndOf="@+id/btn_back_photo"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MarvelProject.Button.Cut"
         app:strokeColor="@color/black"
         app:strokeWidth="1dp" />

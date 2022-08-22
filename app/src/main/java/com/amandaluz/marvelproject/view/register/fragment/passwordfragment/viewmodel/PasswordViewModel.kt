@@ -1,4 +1,4 @@
-package com.amandaluz.marvelproject.view.login.register.fragment.passwordfragment.viewmodel
+package com.amandaluz.marvelproject.view.register.fragment.passwordfragment.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

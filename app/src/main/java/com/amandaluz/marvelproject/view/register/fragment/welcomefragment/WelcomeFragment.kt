@@ -1,4 +1,4 @@
-package com.amandaluz.marvelproject.view.login.register.fragment.welcomefragment
+package com.amandaluz.marvelproject.view.register.fragment.welcomefragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,11 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.data.model.User
 import com.amandaluz.marvelproject.databinding.FragmentWelcomeBinding
-import com.amandaluz.marvelproject.view.home.activity.HomeActivity
 import com.amandaluz.marvelproject.view.login.activity.LoginActivity
+import com.amandaluz.marvelproject.view.register.RegisterActivity
 
 class WelcomeFragment : Fragment() {
     private lateinit var binding: FragmentWelcomeBinding
@@ -38,9 +37,8 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun goToHomePage() {
-        binding.materialButton3.setOnClickListener {
-            val intent = Intent(context, LoginActivity::class.java)
-            startActivity(intent)
+        binding.btnGoToLogin.setOnClickListener {
+            (activity as RegisterActivity).goTo()
         }
     }
 

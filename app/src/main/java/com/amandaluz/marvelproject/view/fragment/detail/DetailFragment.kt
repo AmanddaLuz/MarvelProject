@@ -25,6 +25,7 @@ import com.amandaluz.marvelproject.util.apikey
 import com.amandaluz.marvelproject.util.hash
 import com.amandaluz.marvelproject.util.ts
 import com.amandaluz.marvelproject.view.fragment.detail.adapter.CarouselAdapter
+import com.amandaluz.marvelproject.view.fragment.detail.adapter.ComicsAndSeriesFields
 import com.amandaluz.marvelproject.view.fragment.detail.decoration.BoundsOffsetDecoration
 import com.amandaluz.marvelproject.view.fragment.detail.decoration.LinearHorizontalSpacingDecoration
 import com.amandaluz.marvelproject.view.fragment.detail.decoration.ProminentLayoutManager
@@ -192,41 +193,38 @@ class DetailFragment : Fragment() {
     private fun setAdapter(list: List<Result>) {
         carouselAdapter = CarouselAdapter(list){
             binding.run {
-                Glide.with(this@DetailFragment)
-                    .load("${it.thumbnail.path}.${it.thumbnail.extension}")
-                    .into(imgDetail)
-                detailsTitle.text = it.title
-                detailsDescription.text = it.description
-                fabDetails.visibility = View.INVISIBLE
-                fabBackToCharacter.visibility = View.VISIBLE
-                backToCharacter()
+                ComicsAndSeriesFields(it).run {
+                    setBaseFieldsOfScreen(it)
 
-                val page = it.pageCount.toString()
-                val price = it.prices
-                val itemPrice = it.prices?.first()?.price
+                    setVisibilityAs(fabDetails, View.INVISIBLE)
+                    setVisibilityAs(fabBackToCharacter, View.VISIBLE)
 
-                if(price.isNullOrEmpty() || itemPrice.toString() == "0.0"){
-                    comicsPrice.visibility = View.INVISIBLE
-                } else {
-                    comicsPrice.visibility = View.VISIBLE
-                    comicsPrice.text = "Price: $${it.prices.first()?.price.toString()}"
-                }
+                    backToCharacter()
 
-                if(page.isNullOrBlank() || page == "0"){
-                    comicsPages.visibility = View.INVISIBLE
-                } else {
-                    comicsPages.visibility = View.VISIBLE
-                    comicsPages.text = "Pages: ${it.pageCount}"
-                }
+                    val textPrices = "Price:\n$ ${it.prices?.first()?.price}"
+                    setPricesFields(comicsPrice, textPrices)
 
-                if(it.dates.isNullOrEmpty()){
-                    comicsOnSaleDate.visibility = View.INVISIBLE
-                } else {
-                    comicsOnSaleDate.visibility = View.VISIBLE
-                    comicsOnSaleDate.text ="Release Date: ${it.dates.first()?.date?.substring(0,10).replace("-","/")}"
+                    val textPages = "Pages:\n${it.pageCount}"
+                    setPageFields(comicsPages, textPages)
+
+                    val textOnSaleDate = "Release Date:\n${it.dates?.first()?.date?.substring(0,10)
+                        ?.replace("-", "/")}"
+                    setOnSaleDateFields(comicsOnSaleDate, textOnSaleDate)
                 }
             }
         }
+    }
+
+    private fun CharacterCategoryDetailBinding.setBaseFieldsOfScreen(
+        it: Result
+    ) {
+        Glide.with(this@DetailFragment)
+            .load("${it.thumbnail.path}.${it.thumbnail.extension}")
+            .into(imgDetail)
+        detailsTitle.text = it.title
+        detailsDescription.text = it.description
+        fabDetails.visibility = View.INVISIBLE
+        fabBackToCharacter.visibility = View.VISIBLE
     }
 
     private fun CharacterCategoryDetailBinding.backToCharacter() {
