@@ -24,7 +24,7 @@
             android:name="com.amandaluz.marvelproject.view.register.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".view.login.activity.LoginActivity"
+            android:name="com.amandaluz.marvelproject.view.splash.SplashActivity"
             android:exported="true">
 
 
@@ -33,12 +33,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.login.activity.LoginActivity"
+            android:exported="false">
+
+        </activity>
 
         <activity
             android:name="com.amandaluz.marvelproject.view.home.activity.HomeActivity"
             android:exported="false"/>
         <provider
-            android:authorities="com.hectorfortuna.marvelproject.fileprovider"
+            android:authorities="com.amandaluz.marvelproject.fileprovider"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
