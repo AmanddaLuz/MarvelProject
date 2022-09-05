@@ -1,16 +1,16 @@
 package com.amandaluz.marvelproject.view.register.fragment.welcomefragment
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.amandaluz.marvelproject.data.model.User
 import com.amandaluz.marvelproject.databinding.FragmentWelcomeBinding
-import com.amandaluz.marvelproject.view.login.activity.LoginActivity
 import com.amandaluz.marvelproject.view.register.RegisterActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WelcomeFragment : Fragment() {
     private lateinit var binding: FragmentWelcomeBinding
     private lateinit var user: User

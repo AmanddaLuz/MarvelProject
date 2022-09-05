@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import com.amandaluz.marvelproject.data.db.CharacterDAO
 import com.amandaluz.marvelproject.data.model.Favorites
 import com.amandaluz.marvelproject.data.model.Results
+import javax.inject.Inject
 
-class DatabaseRepositoryImpl(private val dao: CharacterDAO):DatabaseRepository {
+class DatabaseRepositoryImpl @Inject constructor(private val dao: CharacterDAO):DatabaseRepository {
     override suspend fun insertCharacter(result: Favorites) {
         TODO("Not yet implemented")
     }

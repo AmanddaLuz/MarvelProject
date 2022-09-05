@@ -6,20 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.core.Status
-import com.amandaluz.marvelproject.data.db.AppDatabase
-import com.amandaluz.marvelproject.data.db.CharacterDAO
-import com.amandaluz.marvelproject.data.db.repository.DatabaseRepository
-import com.amandaluz.marvelproject.data.db.repository.DatabaseRepositoryImpl
 import com.amandaluz.marvelproject.data.model.Favorites
 import com.amandaluz.marvelproject.data.model.User
 import com.amandaluz.marvelproject.data.model.modelcomics.Result
-import com.amandaluz.marvelproject.data.network.ApiService
-import com.amandaluz.marvelproject.data.repository.categoryrepository.CategoryRepository
-import com.amandaluz.marvelproject.data.repository.categoryrepository.CategoryRepositoryImpl
 import com.amandaluz.marvelproject.databinding.CharacterCategoryDetailBinding
 import com.amandaluz.marvelproject.util.apikey
 import com.amandaluz.marvelproject.util.hash
@@ -31,17 +25,13 @@ import com.amandaluz.marvelproject.view.fragment.detail.decoration.LinearHorizon
 import com.amandaluz.marvelproject.view.fragment.detail.decoration.ProminentLayoutManager
 import com.amandaluz.marvelproject.view.fragment.detail.viewmodel.DetailViewModel
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.Dispatchers
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
-    lateinit var viewModel: DetailViewModel
-    lateinit var repository: DatabaseRepository
-    lateinit var repositoryCategory: CategoryRepository
     private var checkCharacter: Boolean = false
-    private val dao: CharacterDAO by lazy {
-        AppDatabase.getDb(requireContext()).characterDao()
-    }
+    private val viewModel by viewModels<DetailViewModel>()
     private lateinit var snapHelper: SnapHelper
     private lateinit var carouselAdapter: CarouselAdapter
     private lateinit var binding: CharacterCategoryDetailBinding
@@ -59,12 +49,6 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favorite = arguments?.getParcelable<Favorites>("FAVORITE") as Favorites
-        repository = DatabaseRepositoryImpl(dao)
-        repositoryCategory = CategoryRepositoryImpl(ApiService.service)
-        viewModel = DetailViewModel.DetailViewModelProviderFactory(
-            repository, repositoryCategory, Dispatchers.IO
-        )
-            .create(DetailViewModel::class.java)
 
         getUserByIntent()
 

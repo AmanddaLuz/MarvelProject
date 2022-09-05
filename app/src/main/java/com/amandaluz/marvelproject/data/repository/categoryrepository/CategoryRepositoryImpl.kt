@@ -2,8 +2,9 @@ package com.amandaluz.marvelproject.data.repository.categoryrepository
 
 import com.amandaluz.marvelproject.data.model.modelcomics.ComicsResponse
 import com.amandaluz.marvelproject.data.network.Service
+import javax.inject.Inject
 
-class CategoryRepositoryImpl(private val api: Service): CategoryRepository {
+class CategoryRepositoryImpl @Inject constructor(private val api: Service): CategoryRepository {
     override suspend fun getComics(
         apikey: String,
         hash: String,

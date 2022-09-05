@@ -3,14 +3,18 @@ package com.amandaluz.marvelproject.view.register.fragment.photofragment.viewmod
 import androidx.lifecycle.*
 import com.amandaluz.marvelproject.core.State
 import com.amandaluz.marvelproject.data.model.User
+import com.amandaluz.marvelproject.di.qualifier.IO
 import com.amandaluz.marvelproject.view.login.repository.RegisterRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class PhotoViewModel(
+@HiltViewModel
+class PhotoViewModel @Inject constructor(
     private val repository: RegisterRepository,
-    private val ioDispatcher: CoroutineDispatcher
+    @IO private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _user = MutableLiveData<State<Boolean>>()
@@ -31,15 +35,4 @@ class PhotoViewModel(
         }
     }
 
-    class PhotoViewModelProvider(
-        private val repository: RegisterRepository,
-        private val ioDispatcher: CoroutineDispatcher
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(PhotoViewModel::class.java)) {
-                return PhotoViewModel(repository, ioDispatcher) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel Class")
-        }
-    }
 }

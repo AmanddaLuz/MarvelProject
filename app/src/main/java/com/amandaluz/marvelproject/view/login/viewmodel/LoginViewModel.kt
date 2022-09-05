@@ -6,12 +6,15 @@ import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.core.State
 import com.amandaluz.marvelproject.data.model.User
 import com.amandaluz.marvelproject.data.repository.loginrepository.LoginRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
+import javax.inject.Inject
 import kotlin.jvm.Throws
 
-class LoginViewModel(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     private val repository: LoginRepository
 ) : ViewModel() {
 
@@ -71,14 +74,4 @@ class LoginViewModel(
             else -> null
         }
 
-    class LoginViewModelProviderFactory(
-        private val repository: LoginRepository
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-                return LoginViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unknown viewModel Class")
-        }
-    }
 }

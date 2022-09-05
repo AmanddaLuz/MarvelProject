@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.amandaluz.marvelproject.R
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class PasswordViewModel : ViewModel() {
+@HiltViewModel
+class PasswordViewModel @Inject constructor () : ViewModel() {
 
     private val _passwordFieldErrorResId = MutableLiveData<Int?>()
     val passwordFieldErrorResId: LiveData<Int?> = _passwordFieldErrorResId
@@ -40,13 +43,4 @@ class PasswordViewModel : ViewModel() {
         if (passwordConfirmation != password) {
             R.string.different_password
         } else null
-
-    class PasswordViewModelProvideFactory : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(PasswordViewModel::class.java)){
-                return PasswordViewModel() as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
-    }
 }

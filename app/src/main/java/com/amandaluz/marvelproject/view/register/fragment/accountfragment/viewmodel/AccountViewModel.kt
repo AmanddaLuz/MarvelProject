@@ -3,9 +3,12 @@ package com.amandaluz.marvelproject.view.register.fragment.accountfragment.viewm
 import android.util.Patterns
 import androidx.lifecycle.*
 import com.amandaluz.marvelproject.R
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.IllegalArgumentException
+import javax.inject.Inject
 
-class AccountViewModel : ViewModel() {
+@HiltViewModel
+class AccountViewModel @Inject constructor() : ViewModel() {
 
     private val _emailFieldErrorResId = MutableLiveData<Int?>()
     val emailFieldErrorResId: LiveData<Int?> = _emailFieldErrorResId
@@ -50,14 +53,4 @@ class AccountViewModel : ViewModel() {
             R.string.invalid_name
         } else null
 
-    class AccountViewModelProvideFactory(
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AccountViewModel::class.java)) {
-                return AccountViewModel() as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
-
-    }
 }

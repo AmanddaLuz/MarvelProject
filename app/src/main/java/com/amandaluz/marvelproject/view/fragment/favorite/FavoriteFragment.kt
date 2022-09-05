@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.core.Status
@@ -21,14 +22,12 @@ import com.amandaluz.marvelproject.databinding.FragmentFavoriteBinding
 import com.amandaluz.marvelproject.util.ConfirmDialog
 import com.amandaluz.marvelproject.view.adapter.CharacterAdapter
 import com.amandaluz.marvelproject.view.fragment.favorite.viewmodel.FavoriteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
-    lateinit var viewModel: FavoriteViewModel
-    lateinit var repository: DatabaseRepository
-    private val dao: CharacterDAO by lazy {
-        AppDatabase.getDb(requireContext()).characterDao()
-    }
+    private val viewModel by viewModels<FavoriteViewModel> ()
     private lateinit var binding: FragmentFavoriteBinding
     private lateinit var characterAdapter: CharacterAdapter
     private lateinit var user: User
@@ -43,9 +42,6 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        repository = DatabaseRepositoryImpl(dao)
-        viewModel = FavoriteViewModel(repository, Dispatchers.IO)
 
         activity?.let {
             user = it.intent.getParcelableExtra<User>("USER") as User

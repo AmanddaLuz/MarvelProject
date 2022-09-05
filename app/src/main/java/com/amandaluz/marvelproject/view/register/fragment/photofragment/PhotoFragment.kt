@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.core.Status
@@ -18,18 +19,15 @@ import com.amandaluz.marvelproject.util.toast
 import com.amandaluz.marvelproject.view.register.fragment.photofragment.viewmodel.PhotoViewModel
 import com.amandaluz.marvelproject.view.login.repository.RegisterRepository
 import com.amandaluz.marvelproject.view.login.repository.RegisterRepositoryImpl
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 
+@AndroidEntryPoint
 class PhotoFragment : Fragment() {
     private lateinit var binding: FragmentPhotoBinding
-    private lateinit var viewModel: PhotoViewModel
-    private lateinit var repository: RegisterRepository
+    private val viewModel by viewModels<PhotoViewModel>()
     private lateinit var user: User
     private var uriImage: Uri? = null
-
-    private val dao: CharacterDAO by lazy {
-        AppDatabase.getDb(requireContext()).characterDao()
-    }
 
     private var getContent = registerForActivityResult(
         ActivityResultContracts.GetContent()
@@ -51,10 +49,6 @@ class PhotoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         user = arguments?.getParcelable<User>("REGISTER_USER") as User
-
-        repository = RegisterRepositoryImpl(dao)
-        viewModel = PhotoViewModel.PhotoViewModelProvider(repository, Dispatchers.IO)
-            .create(PhotoViewModel::class.java)
 
         clickToChoosePhoto()
         insertUserOnDatabase(user)

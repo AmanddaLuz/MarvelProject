@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -44,12 +45,12 @@ ext{
     kotlin_version = "1.4.32"
     retrofitVersion = '2.9.0'
     googleGsonVersion = '2.8.0'
-    okHttpVersion = '4.8.0'
+    okHttpVersion = '4.10.0'
     lifecycleVersion = '2.2.0'
-    coroutinesVersion = '1.4.3'
-    nav_version = '2.3.5'
+    coroutinesVersion = '1.6.4'
+    nav_version = '2.5.1'
     glide_version = '4.11.0'
-    room_version = '2.4.2'
+    room_version = '2.4.3'
 }
 
 dependencies {
@@ -78,29 +79,38 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3"
 // androidTestImplementation for Android instrumentation tests
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3"
-// Coroutine Lifecycle Scopes
+    // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+
 // Activity KTX for viewModels()
     implementation "androidx.activity:activity-ktx:1.2.3"
 // Room
+
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
 // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
+
 // Navigation Components
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
 // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
 // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
+
 // MockWebServer
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.2.2"
+
 // Mockito
     testImplementation 'org.mockito:mockito-core:3.2.4'
+
 // Local Unit Tests
     implementation "androidx.test:core:1.4.0"
     testImplementation "junit:junit:4.13"
@@ -109,6 +119,7 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
     testImplementation "com.google.truth:truth:1.0.1"
     testImplementation "org.mockito:mockito-core:2.21.0"
+
 // Instrumented Unit Tests
     androidTestImplementation "junit:junit:4.13"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
@@ -117,6 +128,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation "org.mockito:mockito-core:2.21.0"
+
     //Floating action button
     implementation 'com.github.clans:fab:1.6.4'
+
+    //Dagger - Hilt
+    implementation 'com.google.dagger:hilt-android:2.43.2'
+    kapt 'com.google.dagger:hilt-compiler:2.43.2'
 }

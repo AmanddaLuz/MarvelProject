@@ -7,17 +7,21 @@ import com.amandaluz.marvelproject.data.model.Favorites
 import com.amandaluz.marvelproject.data.model.Results
 import com.amandaluz.marvelproject.data.model.modelcomics.ComicsResponse
 import com.amandaluz.marvelproject.data.repository.categoryrepository.CategoryRepository
+import com.amandaluz.marvelproject.di.qualifier.IO
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.lang.IllegalArgumentException
+import javax.inject.Inject
 import kotlin.Exception
 
-class DetailViewModel(
+@HiltViewModel
+class DetailViewModel @Inject constructor(
     private val databaseRepository: DatabaseRepository,
     private val categoryRepository: CategoryRepository,
-    private val ioDispatcher: CoroutineDispatcher
+    @IO private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _response = MutableLiveData<State<Boolean>>()
@@ -119,18 +123,6 @@ class DetailViewModel(
         } catch (e: Exception){
             _delete.value = State.loading(false)
             _delete.value = State.error(e)
-        }
-    }
-    class DetailViewModelProviderFactory(
-        private val repository: DatabaseRepository,
-        private val categoryRepository: CategoryRepository,
-        private val ioDispatcher: CoroutineDispatcher
-    ): ViewModelProvider.Factory{
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if(modelClass.isAssignableFrom(DetailViewModel::class.java)){
-                return DetailViewModel(repository,categoryRepository, ioDispatcher) as T
-            }
-            throw IllegalArgumentException("Unknown viewModel Class")
         }
     }
 }

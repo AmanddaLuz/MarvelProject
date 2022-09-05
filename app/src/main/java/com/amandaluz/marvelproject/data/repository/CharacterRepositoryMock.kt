@@ -2,8 +2,9 @@ package com.amandaluz.marvelproject.data.repository
 
 import com.amandaluz.marvelproject.data.model.CharacterResponse
 import com.google.gson.Gson
+import javax.inject.Inject
 
-class CharacterRepositoryMock : CharacterRepository {
+class CharacterRepositoryMock @Inject constructor() : CharacterRepository {
     override suspend fun getCharacters(
         apikey: String,
         hash: String,

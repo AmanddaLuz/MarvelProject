@@ -8,14 +8,19 @@ import com.amandaluz.marvelproject.core.State
 import com.amandaluz.marvelproject.data.db.repository.DatabaseRepository
 import com.amandaluz.marvelproject.data.model.Favorites
 import com.amandaluz.marvelproject.data.model.Results
+import com.amandaluz.marvelproject.di.qualifier.IO
+import dagger.hilt.InstallIn
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
-class FavoriteViewModel(
+@HiltViewModel
+class FavoriteViewModel @Inject constructor(
     private val repository: DatabaseRepository,
-    private val ioDispatcher: CoroutineDispatcher
+    @IO private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _delete = MutableLiveData<State<Boolean>>()

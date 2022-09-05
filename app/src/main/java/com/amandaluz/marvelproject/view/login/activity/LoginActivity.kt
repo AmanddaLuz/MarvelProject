@@ -3,6 +3,7 @@ package com.amandaluz.marvelproject.view.login.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.amandaluz.marvelproject.core.Status
 import com.amandaluz.marvelproject.data.db.AppDatabase
 import com.amandaluz.marvelproject.data.db.CharacterDAO
@@ -16,22 +17,18 @@ import com.amandaluz.marvelproject.util.toast
 import com.amandaluz.marvelproject.view.home.activity.HomeActivity
 import com.amandaluz.marvelproject.view.register.RegisterActivity
 import com.amandaluz.marvelproject.view.login.viewmodel.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
-    private lateinit var repository: LoginRepository
-    private val dao: CharacterDAO by lazy { AppDatabase.getDb(applicationContext).characterDao() }
+    private val viewModel by viewModels<LoginViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        repository = LoginRepositoryImpl(dao)
-        viewModel = LoginViewModel.LoginViewModelProviderFactory(repository)
-            .create(LoginViewModel::class.java)
 
         observeVMEvents()
 

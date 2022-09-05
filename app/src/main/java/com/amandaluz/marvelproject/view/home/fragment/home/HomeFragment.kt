@@ -2,8 +2,9 @@ package com.amandaluz.marvelproject.view.home.fragment.home
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.amandaluz.marvelproject.R
@@ -11,9 +12,7 @@ import com.amandaluz.marvelproject.core.BaseFragment
 import com.amandaluz.marvelproject.core.Status
 import com.amandaluz.marvelproject.core.hasInternet
 import com.amandaluz.marvelproject.data.model.Results
-import com.amandaluz.marvelproject.data.network.ApiService
 import com.amandaluz.marvelproject.data.repository.CharacterRepository
-import com.amandaluz.marvelproject.data.repository.CharactersRepositoryImpl
 import com.amandaluz.marvelproject.databinding.FragmentHomeBinding
 import com.amandaluz.marvelproject.util.ConfirmDialog
 import com.amandaluz.marvelproject.util.apikey
@@ -21,14 +20,10 @@ import com.amandaluz.marvelproject.util.hash
 import com.amandaluz.marvelproject.util.ts
 import com.amandaluz.marvelproject.view.adapter.CharacterAdapter
 import com.amandaluz.marvelproject.view.home.fragment.home.viewmodel.HomeViewModel
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
-import androidx.appcompat.widget.SearchView
-import com.amandaluz.marvelproject.data.model.User
 
 class HomeFragment : BaseFragment() {
-    lateinit var viewModel: HomeViewModel
+    private val viewModel by viewModels<HomeViewModel>()
     lateinit var repository: CharacterRepository
     lateinit var binding: FragmentHomeBinding
     private lateinit var characterAdapter: CharacterAdapter
@@ -46,10 +41,6 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag("CONNECTION").i(hasInternet(context).toString())
-
-        repository = CharactersRepositoryImpl(ApiService.service)
-        viewModel = HomeViewModel.HomeViewModelProviderFactory(repository, Dispatchers.IO)
-            .create(HomeViewModel::class.java)
 
         paginationSetup()
         checkConnection()

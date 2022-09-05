@@ -4,14 +4,19 @@ import androidx.lifecycle.*
 import com.amandaluz.marvelproject.core.State
 import com.amandaluz.marvelproject.data.model.CharacterResponse
 import com.amandaluz.marvelproject.data.repository.CharacterRepository
+import com.amandaluz.marvelproject.di.qualifier.IO
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.IllegalArgumentException
+import javax.inject.Inject
 
-class HomeViewModel(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     private val repository: CharacterRepository,
-    private val ioDispatcher: CoroutineDispatcher
+    @IO private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _response = MutableLiveData<State<CharacterResponse>>()
@@ -50,18 +55,6 @@ class HomeViewModel(
                 _search.value = State.error(throwable)
                 _search.value = State.loading(false)
             }
-        }
-    }
-
-    class HomeViewModelProviderFactory(
-        private val repository: CharacterRepository,
-        private val ioDispatcher: CoroutineDispatcher
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-                return HomeViewModel(repository, ioDispatcher) as T
-            }
-            throw IllegalArgumentException("Unknown viewModel Class")
         }
     }
 }
