@@ -1,16 +1,18 @@
 package com.amandaluz.marvelproject.view.home.fragment.home.viewmodel
 
 import androidx.lifecycle.*
+import com.amandaluz.marvelproject.core.ModuleHawk
 import com.amandaluz.marvelproject.core.State
 import com.amandaluz.marvelproject.data.model.CharacterResponse
 import com.amandaluz.marvelproject.data.repository.CharacterRepository
+import com.amandaluz.marvelproject.data.repository.loginrepository.hawk.CharacterCacheRepository
+import com.amandaluz.marvelproject.data.repository.loginrepository.hawk.CharacterCacheRepositoryImpl
+import com.amandaluz.marvelproject.data.repository.loginrepository.hawk.CharacterKeys
 import com.amandaluz.marvelproject.di.qualifier.IO
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,6 +20,8 @@ class HomeViewModel @Inject constructor(
     private val repository: CharacterRepository,
     @IO private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
+
+    private val cacheRepository by lazy { CharacterCacheRepositoryImpl(ModuleHawk) }
 
     private val _response = MutableLiveData<State<CharacterResponse>>()
     val response: LiveData<State<CharacterResponse>> = _response
@@ -35,6 +39,8 @@ class HomeViewModel @Inject constructor(
                 }
                 _response.value = State.loading(false)
                 _response.value = State.success(response)
+                populateCharacters(response)
+
             } catch (throwable: Throwable) {
                 _response.value = State.error(throwable)
                 _response.value = State.loading(false)
@@ -56,5 +62,9 @@ class HomeViewModel @Inject constructor(
                 _search.value = State.loading(false)
             }
         }
+    }
+
+    private fun populateCharacters(characterResponse: CharacterResponse){
+        cacheRepository.add(CharacterKeys.CHARACTERS, characterResponse)
     }
 }

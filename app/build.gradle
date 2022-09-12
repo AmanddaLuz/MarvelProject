@@ -135,4 +135,7 @@ dependencies {
     //Dagger - Hilt
     implementation 'com.google.dagger:hilt-android:2.43.2'
     kapt 'com.google.dagger:hilt-compiler:2.43.2'
+
+    //hawk
+    implementation "com.orhanobut:hawk:2.0.1"
 }

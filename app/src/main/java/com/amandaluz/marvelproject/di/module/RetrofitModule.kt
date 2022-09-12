@@ -1,6 +1,5 @@
 package com.amandaluz.marvelproject.di.module
 
-import android.app.Service
 import com.amandaluz.marvelproject.util.baseUrl
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -12,7 +11,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)

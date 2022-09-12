@@ -9,10 +9,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.amandaluz.marvelproject.R
 import com.amandaluz.marvelproject.core.BaseFragment
+import com.amandaluz.marvelproject.core.ModuleHawk
 import com.amandaluz.marvelproject.core.Status
 import com.amandaluz.marvelproject.core.hasInternet
+import com.amandaluz.marvelproject.data.model.CharacterResponse
 import com.amandaluz.marvelproject.data.model.Results
 import com.amandaluz.marvelproject.data.repository.CharacterRepository
+import com.amandaluz.marvelproject.data.repository.loginrepository.hawk.CharacterCacheRepositoryImpl
+import com.amandaluz.marvelproject.data.repository.loginrepository.hawk.CharacterKeys
 import com.amandaluz.marvelproject.databinding.FragmentHomeBinding
 import com.amandaluz.marvelproject.util.ConfirmDialog
 import com.amandaluz.marvelproject.util.apikey
@@ -20,14 +24,19 @@ import com.amandaluz.marvelproject.util.hash
 import com.amandaluz.marvelproject.util.ts
 import com.amandaluz.marvelproject.view.adapter.CharacterAdapter
 import com.amandaluz.marvelproject.view.home.fragment.home.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment() {
     private val viewModel by viewModels<HomeViewModel>()
     lateinit var repository: CharacterRepository
     lateinit var binding: FragmentHomeBinding
+    private lateinit var response: CharacterResponse
     private lateinit var characterAdapter: CharacterAdapter
     private var offsetCharacters: Int = 0
+
+    private val cacheHawk by lazy { CharacterCacheRepositoryImpl(ModuleHawk) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -97,6 +106,7 @@ class HomeFragment : BaseFragment() {
 
     override fun checkConnection() {
         if (hasInternet(context)) {
+            verifyResponse()
             getCharacters()
         } else {
             ConfirmDialog(
@@ -112,9 +122,21 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    private fun verifyResponse() {
+        if (ModuleHawk.contains(CharacterKeys.CHARACTERS)) {
+            getHawk()
+        } else
+            getCharacters()
+    }
+
     private fun getCharacters(limit: Int = 50, offset: Int = 0) {
         val ts = ts()
         viewModel.getCharacters(apikey(), hash(ts), ts.toLong(), limit, offset)
+    }
+
+    private fun getHawk() {
+        response = cacheHawk.get(CharacterKeys.CHARACTERS)
+        setRecyclerView(response.data.results)
     }
 
     private fun searchCharacter(nameStart: String) {

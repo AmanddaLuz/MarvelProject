@@ -8,6 +8,8 @@ import com.amandaluz.marvelproject.data.repository.categoryrepository.CategoryRe
 import com.amandaluz.marvelproject.data.repository.categoryrepository.CategoryRepositoryImpl
 import com.amandaluz.marvelproject.data.repository.loginrepository.LoginRepository
 import com.amandaluz.marvelproject.data.repository.loginrepository.LoginRepositoryImpl
+import com.amandaluz.marvelproject.data.repository.loginrepository.hawk.CharacterCacheRepository
+import com.amandaluz.marvelproject.data.repository.loginrepository.hawk.CharacterCacheRepositoryImpl
 import com.amandaluz.marvelproject.view.login.repository.RegisterRepository
 import com.amandaluz.marvelproject.view.login.repository.RegisterRepositoryImpl
 import dagger.Binds
